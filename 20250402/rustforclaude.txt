@@ -1,0 +1,34 @@
+I have been vibe coding this month and quite a lot.
+This new “way” of coding is quite controversial because it is seen as basically building program without any programing knowledge.
+
+This term was first thrown out by an Ex open AI  founder Andrej Karpathy
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">There&#39;s a new kind of coding I call &quot;vibe coding&quot;, where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It&#39;s possible because the LLMs (e.g. Cursor Composer w Sonnet) are getting too good. Also I just talk to Composer with SuperWhisper…</p>&mdash; Andrej Karpathy (@karpathy) <a href="https://twitter.com/karpathy/status/1886192184808149383?ref_src=twsrc%5Etfw">February 2, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+
+I’m using a lot of the claude.ai for building my daily tools, this is  exceptional for improving my efficiency where I wouldn’t need hours of manual operations or dedicated tools all those tasks.
+
+Now you can just throw it to claude.ai and use it !
+
+No you can’t!
+
+In reality this is way we wish it would work but the real process is.
+
+1 – Very precisly prompt the request of the tool you are looking to create ( I recommend Rust by the way ).
+2 – Read the code produced ( Yes you have to read it ! )
+3 – Get in scramble because the code is very badly written.
+4 – Fix all the stupid mistake in the code.
+5 – test the tool produced on a sample data and validate this is what you need.
+6 – if it doesn’t produce the expected result, go back to step 1 with a very precise prompt where the issue is.
+7 – Loop from 1 to 6 until you are happy with it.
+8 – Never ship in production unless you have a clear untersdanting of the produced code.
+
+
+So in my case I’m using this only to build very simple and small tools to help me on my daily work and increase my efficiency.
+I have to tell this is quite satisfiy in the way that I can get things done very quickly.
+
+I’m basically doing “Vibe QA”. This works because I have a clear understanding of what I need how I need it.
+The code is small enough for me to be able to go through it and review it before using it.
+
+So here is the list of tools I have created this month:
+
