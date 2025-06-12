@@ -11,6 +11,10 @@ convert_to_ordinal() {
     esac
 }
 
+# Delete existing html files
+find -type f -name "*.html" -delete
+ls -al
+
 # Start of the HTML content
 cat <<EOF > index.html
 <!DOCTYPE html>
@@ -75,9 +79,6 @@ cat <<EOF > index.html
         <ul>
 EOF
 
-# Delete existing html files
-find -type f -name "*.html" -delete
-ls -al
 
 # Loop through each item in the current directory
 for item in *; do
