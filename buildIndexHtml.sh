@@ -81,6 +81,21 @@ for item in *; do
     if [ -d "$item" ]; then
         # Check if the directory name consists only of digits
         if echo "$item" | grep -q '^[0-9]\+$'; then
+	    # look for an html file in the directory
+            html_file=$(find "$item" -maxdepth 1 -type f -name "*.html" | head -n 1)
+            # Look for an ODT file in the directory
+            odt_file=$(find "$item" -maxdepth 1 -type f -name "*.odt" | head -n 1)
+	    # if html don't exist and the odt exist create the html version with media
+	    echo "html_file: $html_file"
+	    echo "odt_file: $odt_file"
+            if [ -z "$html_file" ] && [ -n "$odt_file" ]; then
+            	odt_file=$(find "$item" -maxdepth 1 -type f -name "*.odt" | head -n 1)
+		odt_filename=$(basename "$odt_file")
+		echo $odt_filename
+		filename=${odt_filename%.*}
+		pandoc -f odt $odt_file --extract-media=$item -o "$item/$filename.html" -c style.css
+
+            fi
             # Extract the year, month, and day parts from the directory name
             year=$(echo "$item" | cut -c1-4)
             month=$(echo "$item" | cut -c5-6)
@@ -90,8 +105,17 @@ for item in *; do
             month_name=$(date -d "${year}-${month}-${day}" "+%B")
             day_ordinal=$(convert_to_ordinal "$day")
 
+
+            # If no HTML file is found, default to 404.html
+            if [ -z "$html_file" ]; then
+                html_file="$item/404.html"
+            fi
+
+            # Extract just the filename from the path
+            html_filename=$(basename "$html_file")
+
             # Append the formatted date as a list item to the HTML file
-            echo "            <li><a href=\"$item/index.html\">$month_name ${day_ordinal}, $year</a></li>" >> index.html
+            echo "            <li><a href=\"$item/$html_filename\">$month_name ${day_ordinal}, $year</a></li>" >> index.html
         fi
     fi
 done
