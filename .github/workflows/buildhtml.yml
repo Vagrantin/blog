@@ -45,16 +45,13 @@ jobs:
 
     - name: Run build script
       # Execute the buildIndexHtml.sh script.
-      # This script will generate the index.html file as per its logic.
+      # This script will generate the html files.
       run: ./buildIndexHtml.sh
 
     - name: Commit and Push changes
-      # This section is now uncommented and will commit the generated index.html back to the repository.
       run: |
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-        git add index.html
-        git commit -m "Build: Update index.html" || echo "No changes to commit"
+        git add -A
+        git commit -am "Build html pages" || echo "No changes to commit"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically provided token for pushing
