@@ -53,9 +53,13 @@ jobs:
       # This script will generate the html files.
       run: ./buildIndexHtml.sh
 
+    - name: Generate unique timestamp
+      id: generate_timestamp # Assign an ID to this step to reference its outputs
+      run: echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> "$GITHUB_ENV"
+
     - name: Commit and Push changes
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: Build html pages
-        tagging_message: 'publish-1'
+        tagging_message: 'publish-${{ env.TIMESTAMP }}'
         push_options: '--tag'
