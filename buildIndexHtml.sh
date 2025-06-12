@@ -75,6 +75,9 @@ cat <<EOF > index.html
         <ul>
 EOF
 
+# Delete existing html files
+find -type f -name "*.html" -delete
+
 # Loop through each item in the current directory
 for item in *; do
     # Check if the item is a directory
