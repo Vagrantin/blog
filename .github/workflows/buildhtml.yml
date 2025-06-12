@@ -53,7 +53,7 @@ jobs:
         git config --global user.email ${{ secrets.MAIL }}
         git config --global user.name ${{ secrets.NAME }}
         git add -A
-        git commit -am "Build html pages" || echo "No changes to commit"
+        git commit -am "Build html pages"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically provided token for pushing
