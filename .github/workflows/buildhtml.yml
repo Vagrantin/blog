@@ -58,3 +58,4 @@ jobs:
       with:
         commit_message: Build html pages
         tagging_message: 'publish'
+        push_options: '--tag'
