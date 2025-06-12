@@ -35,6 +35,10 @@ jobs:
         # Verify that Pandoc is installed and its version is correct
         pandoc --version
 
+        echo "Removing downloaded Pandoc .deb package..."
+        # Remove the downloaded .deb package to clean up the runner's workspace.
+        rm "$PANDOC_DEB_FILE"
+
     - name: Make build script executable
       # Ensure the shell script has execute permissions before running it.
       run: chmod +x buildIndexHtml.sh
