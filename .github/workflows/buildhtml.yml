@@ -54,6 +54,6 @@ jobs:
       run: ./buildIndexHtml.sh
 
     - name: Commit and Push changes
-    - uses: stefanzweifel/git-auto-commit-action@v5
+      uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: Build html pages
