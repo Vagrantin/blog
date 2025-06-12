@@ -86,15 +86,15 @@ for item in *; do
             # Look for an ODT file in the directory
             odt_file=$(find "$item" -maxdepth 1 -type f -name "*.odt" | head -n 1)
 	    # if html don't exist and the odt exist create the html version with media
-	    echo "html_file: $html_file"
-	    echo "odt_file: $odt_file"
+	    #echo "html_file: $html_file"
+	    #echo "odt_file: $odt_file"
             if [ -z "$html_file" ] && [ -n "$odt_file" ]; then
             	odt_file=$(find "$item" -maxdepth 1 -type f -name "*.odt" | head -n 1)
 		odt_filename=$(basename "$odt_file")
-		echo $odt_filename
+		#echo $odt_filename
 		filename=${odt_filename%.*}
 		cd $item
-		pandoc -f odt "$odt_filename" --extract-media=. -o "$filename.html" -c style.css
+		pandoc -s -f odt "$odt_filename" --extract-media=. -o "$filename.html" --css="../style.css"
 		cd ..
 
             fi
