@@ -1,0 +1,44 @@
+# .github/workflows/build-blog.yml
+name: Build Blog Index
+
+on:
+  push:
+    branches:
+      - main # Trigger this workflow on pushes to the 'main' branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4 # Action to check out your repository code
+
+    - name: Set up Pandoc 3.7.0.2
+      # Use pandoc/pandoc-action to easily install a specific version of Pandoc.
+      # This action handles downloading and setting up Pandoc in the environment.
+      uses: pandoc/pandoc-action@master
+      with:
+        # Specify the exact Pandoc version required by the user.
+        # This will download the corresponding binary release from the Pandoc repository.
+        version: 3.7.0.2
+
+    - name: Make build script executable
+      # Ensure the shell script has execute permissions before running it.
+      run: chmod +x buildIndexHtml.sh
+
+    - name: Run build script
+      # Execute the buildIndexHtml.sh script.
+      # This script will generate the index.html file as per its logic.
+      run: ./buildIndexHtml.sh
+
+    # Optional: If you want to commit the generated index.html back to the repository
+    - name: Commit and Push changes
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add index.html
+        git commit -m "Build: Update index.html" || echo "No changes to commit"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically provided token for pushing
