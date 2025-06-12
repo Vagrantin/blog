@@ -1,53 +1,125 @@
-<h1 id="why-im-falling-in-love-with-rust">Why I'm Falling in Love with
-Rust</h1>
-<p>Hey there! Let me tell you why I'm so excited about learning Rust.
-It's not just another programming language; it's a game-changer for me.
-Here's why:</p>
-<h2 id="why-i-like-rust">Why I Like Rust</h2>
-<h3 id="memory-safety">Memory Safety</h3>
-<p>First off, Rust is memory safe. This means I can write code without
-worrying about common bugs like null pointer dereferences or buffer
-overflows. It's like having a safety net that catches errors at compile
-time, which is a huge relief.</p>
-<h3 id="security">Security</h3>
-<p>With Rust, I can produce more secure code. In today's world, where
-security breaches are all too common, using a language that prioritizes
-safety is a big win. It's reassuring to know that the code I write is
-less likely to have vulnerabilities.</p>
-<p>Learning a Compiled Language</p>
-<p>Rust is a compiled language, in the same area as C and C++. This
-gives me the opportunity to dive into low-level programming while still
-enjoying modern language features. It's like getting the best of both
-worlds—performance and safety.</p>
-<p>Why I'm Learning Rust</p>
-<p>Love for Learning</p>
-<p>I simply love learning new programming languages. Each language
-offers a unique perspective on solving problems, and Rust is no
-exception. It challenges me to think differently and grow as a developer
-( Which I will never be because of at least my lack of algorthim
-knowledge ).</p>
-<p>Developing CLI Tools</p>
-<p>One of the reasons I'm diving into Rust is to develop command-line
-interface (CLI) tools. Rust's efficiency and performance make it perfect
-for building fast and reliable CLI applications. I can already see
-myself creating tools that make my daily tasks easier.</p>
-<p>Crafting Custom Software</p>
-<p>Rust provides me with the freedom to craft software tailored to my
-specific needs. Whether it's a small utility or a larger project, Rust's
-flexibility and power allow me to build exactly what I envision.</p>
-<p>Generative AI</p>
-<p>With the advent of Generative AI, the possibilities are endless. I
-can now craft applications that I wouldn't have even thought few months
-ago. AI tools can help me generate code snippets, debug, and even
-optimize my Rust programs, making the learning process even more
-exciting.</p>
-<p>What Has Changed</p>
-<p>The landscape of software development is evolving rapidly. With
-Generative AI, I can now tackle projects that were once beyond my reach.
-It's like having a superpower that amplifies my creativity and
-productivity.</p>
-<p>---</p>
-<p>I hope this gives you a good sense of why I'm so passionate about
-Rust. It's not just about writing code; it's about embracing a new way
-of thinking and creating. If you're curious about Rust, I highly
-recommend giving it a try. You might just fall in love with it too!</p>
+<p>Hi there, </p>
+<p>This time I have been working on a project which was use-full to me.
+</p>
+<p>For context I'm running my laptop on PopOS with i3wm. My laptop
+getting a bit old now the battery is a bit tired :D. </p>
+<p>i3wm being a you configure it all manual Window Manager, and by
+default I don't have or I'm not aware out-of-the-box to get a
+notification when my battery is getting low. I decide to use the
+opportunity to develop the tool myself. </p>
+<h2 id="this-was-a-very-good-learning-experience.">This was a very good
+learning experience. </h2>
+<ul>
+<li>To learn about the basics of the notification bus of X11 ( yeah I
+know should learn about Wayland but i feel it not ready yet )</li>
+<li>To learn about Systemd services deployments. ( Spoiler: I really
+don't like Systemd, I find it messy )</li>
+<li>To continue learning about Rust ( I still like it even if the hype
+went down :D )</li>
+</ul>
+<h3 id="first-step-talk-to-dbus">First step talk to dbus </h3>
+<p><em>use dbus::blocking::Connection;</em></p>
+<p><em>use dbus::{Message, arg::messageitem::MessageItemArray};</em></p>
+<p><em>use std::{time::Duration, vec};</em></p>
+<p><em>pub fn prendlebus() -&gt; Result&lt;(), Box&lt;dyn
+std::error::Error&gt;&gt; {</em></p>
+<p><em> let timeout = Duration::new(2000,0);</em></p>
+<p><em> // First open up a connection to the session bus.</em></p>
+<p><em> let conn = Connection::new_session()?;</em></p>
+<p><em> </em></p>
+<p><em> // Create a message that calls the Notify method of the
+Notifications interface</em></p>
+<p><em> let mut m = Message::new_method_call(</em></p>
+<p><em> "org.freedesktop.Notifications", // destination</em></p>
+<p><em> "/org/freedesktop/Notifications", // path</em></p>
+<p><em> "org.freedesktop.Notifications", // interface</em></p>
+<p><em> "Notify" // method</em></p>
+<p><em> ).unwrap();</em></p>
+<p><em> </em></p>
+<p><em> // Append the required arguments to the message</em></p>
+<p><em> let notificationlevel: u32 = 0;</em></p>
+<p><em> let actions =
+MessageItemArray::new(vec![],"as".into()).unwrap();</em></p>
+<p><em> let hints =
+MessageItemArray::new(vec![],"a{sv}".into()).unwrap();</em></p>
+<p><em> let timingout = 5000;</em></p>
+<p><em> m =
+Message::append3(m,"bll",notificationlevel,"/usr/share/icons/ubuntu-mono-dark/status/24/unity-battery-020.svg")</em></p>
+<p><em> .append3("BATTERY", "Your Battery is running low !!",
+actions)</em></p>
+<p><em> .append2(hints, timingout);</em></p>
+<p><em> // Send the message to the bus and handle the possible
+errors</em></p>
+<p><em> match conn.channel().send_with_reply_and_block(m,
+timeout){</em></p>
+<p><em> //match conn.send_with_reply_and_block(m, 2000) {</em></p>
+<p><em> Ok(_) =&gt; println!("Notification sent successfully"),</em></p>
+<p><em> Err(e) =&gt; println!("Error: {}", e),</em></p>
+<p><em> }</em></p>
+<p><em> Ok(())</em></p>
+<p><em>} </em></p>
+<h3 id="then-get-the-battery-level-and-status">Then Get the battery
+level and status </h3>
+<p><em>use std::fs;</em></p>
+<p><em>use bll::prendlebus;</em></p>
+<p><em>fn main() {</em></p>
+<p><em> </em></p>
+<p><em> let warning_value = 600000;</em></p>
+<p><em> let battery_level =
+"/sys/class/power_supply/BAT1/charge_now";</em></p>
+<p><em> let battery_status =
+"/sys/class/power_supply/BAT1/status";</em></p>
+<p><em> println!("Check from {}", battery_level);</em></p>
+<p><em> let current_battery_level =
+fs::read_to_string(battery_level)</em></p>
+<p><em> .expect("Should have been able to read the file")</em></p>
+<p><em> .as_str()</em></p>
+<p><em> .trim()</em></p>
+<p><em> .parse::&lt;u32&gt;()</em></p>
+<p><em> .unwrap();</em></p>
+<p><em> let current_battery_status: String =
+fs::read_to_string(battery_status).expect("should be
+ok").trim().parse().unwrap();</em></p>
+<p><em> //println!("{:#?}",&amp;current_battery_status);</em></p>
+<p><em> //println!("This is the
+content: {}",current_battery_level);</em></p>
+<p><em> </em></p>
+<p><em> // if current now is lower than warning_value</em></p>
+<p><em> // trigger dbus nofitication</em></p>
+<p><em> </em></p>
+<p><em> </em></p>
+<p><em> if current_battery_level &lt;= warning_value {</em></p>
+<p><em> if current_battery_status == "Discharging" {</em></p>
+<p><em> println!("Battery is going to ie !! See {warning_value} &gt;
+{current_battery_level}");</em></p>
+<p><em> let _ = prendlebus();</em></p>
+<p><em> } else {</em></p>
+<p><em> print!("We are charging all good!\n")</em></p>
+<p><em> }</em></p>
+<p><em> }</em></p>
+<p><em>}</em></p>
+<h3 id="finally-run-the-binary-through-systemd-service.">Finally run the
+binary through Systemd service. </h3>
+<p>This is the configuration file to create the service </p>
+<p><em>[Unit]</em></p>
+<p><em>Description=Battery Low Level</em></p>
+<p><em>[Service]</em></p>
+<p><em>Type=oneshot</em></p>
+<p><em>ExecStart=/devouille/bll/target/release/bll</em></p>
+<p><em>User=mducorps</em></p>
+<p>This is the timer to run it every 30sec </p>
+<p><em>[Unit]</em></p>
+<p><em>Description=Bll timer</em></p>
+<p><em>[Timer]</em></p>
+<p><em>OnUnitActiveSec=30s</em></p>
+<p><em>OnBootSec=30s</em></p>
+<p><em>[Install]</em></p>
+<p><em>WantedBy=timers.target</em></p>
+<p>With this I have now a desktop notification when my laptop is running
+low on Battery. working flawlessly so far. </p>
+<p>You can find the source code here. </p>
+<p><a
+href="https://github.com/Vagrantin/bll">https://github.com/Vagrantin/bll</a>
+</p>
+<p>With kind regards </p>
+<p>Matthieu. </p>

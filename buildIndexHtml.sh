@@ -93,7 +93,9 @@ for item in *; do
 		odt_filename=$(basename "$odt_file")
 		echo $odt_filename
 		filename=${odt_filename%.*}
-		pandoc -f odt $odt_file --extract-media=$item -o "$item/$filename.html" -c style.css
+		cd $item
+		pandoc -f odt "$odt_filename" --extract-media=. -o "$filename.html" -c style.css
+		cd ..
 
             fi
             # Extract the year, month, and day parts from the directory name
