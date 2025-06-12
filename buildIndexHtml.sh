@@ -107,7 +107,8 @@ for item in *; do
             month_name=$(date -d "${year}-${month}-${day}" "+%B")
             day_ordinal=$(convert_to_ordinal "$day")
 
-
+	    # look for an html file in the directory
+            html_file=$(find "$item" -maxdepth 1 -type f -name "*.html" | head -n 1)
             # If no HTML file is found, default to 404.html
             if [ -z "$html_file" ]; then
                 html_file="$item/404.html"
