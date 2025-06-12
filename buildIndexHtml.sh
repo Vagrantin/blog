@@ -77,6 +77,7 @@ EOF
 
 # Delete existing html files
 find -type f -name "*.html" -delete
+ls -al
 
 # Loop through each item in the current directory
 for item in *; do
