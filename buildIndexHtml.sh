@@ -22,7 +22,24 @@ cat <<EOF > index.html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Simple Blog</title>
+    <title>Nekkuma</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="Blog">
+    <meta property="og:url" content="https://vagrantin.github.io/blog/">
+    <meta property="og:title" content="Nekkuma">
+    <meta property="og:description" content="BloguiBoulga">
+    <meta property="og:image" content="https://vagrantin.github.io/blog/nekkuma.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="BloguiBoulga">
+    <meta property="twitter:url" content="https://vagrantin.github.io/blog/">
+    <meta property="twitter:title" content="Nekkuma">
+    <meta property="twitter:description" content="BloguiBoulga">
+    <meta property="twitter:image" content="https://vagrantin.github.io/blog/nekkuma.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloguiBoulga</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -73,7 +90,7 @@ cat <<EOF > index.html
     <header>
     </header>
     <div>
-        <h1>Welcome to My Blog</h1>
+        <h1>Dump! Dump! Dump!</h1>
     </div>
     <nav>
         <ul>
