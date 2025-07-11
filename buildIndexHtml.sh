@@ -96,30 +96,30 @@ cat <<EOF > index.html
         <ul>
 EOF
 
-
 # Loop through each item in the current directory
 for item in *; do
     # Check if the item is a directory
     if [ -d "$item" ]; then
         # Check if the directory name consists only of digits
         if echo "$item" | grep -q '^[0-9]\+$'; then
-	    # look for an html file in the directory
+            # Look for an HTML file in the directory
             html_file=$(find "$item" -maxdepth 1 -type f -name "*.html" | head -n 1)
             # Look for an ODT file in the directory
             odt_file=$(find "$item" -maxdepth 1 -type f -name "*.odt" | head -n 1)
-	    # if html don't exist and the odt exist create the html version with media
-	    #echo "html_file: $html_file"
-	    #echo "odt_file: $odt_file"
-            if [ -z "$html_file" ] && [ -n "$odt_file" ]; then
-            	odt_file=$(find "$item" -maxdepth 1 -type f -name "*.odt" | head -n 1)
-		odt_filename=$(basename "$odt_file")
-		#echo $odt_filename
-		filename=${odt_filename%.*}
-		cd $item
-		pandoc -s -f odt "$odt_filename" --extract-media=. -o "$filename.html" --css="../style.css"
-		cd ..
 
+            # If HTML doesn't exist and ODT does, create the HTML version with media
+            if [ -z "$html_file" ] && [ -n "$odt_file" ]; then
+                odt_filename=$(basename "$odt_file")
+                filename=${odt_filename%.*}
+
+                # Navigate into the date directory to run pandoc
+                # This ensures media extraction paths are relative to the ODT file
+                # and the output HTML is placed correctly within "$item".
+                cd "$item" || exit # Exit if cd fails
+                pandoc -s -f odt "$odt_filename" --extract-media=. -o "$filename.html" --css="../style.css"
+                cd .. # Navigate back to the original directory
             fi
+
             # Extract the year, month, and day parts from the directory name
             year=$(echo "$item" | cut -c1-4)
             month=$(echo "$item" | cut -c5-6)
@@ -129,18 +129,39 @@ for item in *; do
             month_name=$(date -d "${year}-${month}-${day}" "+%B")
             day_ordinal=$(convert_to_ordinal "$day")
 
-	    # look for an html file in the directory
+            # Re-check for the HTML file after potential creation
             html_file=$(find "$item" -maxdepth 1 -type f -name "*.html" | head -n 1)
-            # If no HTML file is found, default to 404.html
+            # If no HTML file is found, default to 404.html (or handle as appropriate)
             if [ -z "$html_file" ]; then
-                html_file="$item/404.html"
+                html_file="$item/404.html" # Assuming a 404.html might exist in the date folder
             fi
 
             # Extract just the filename from the path
             html_filename=$(basename "$html_file")
 
-            # Append the formatted date as a list item to the HTML file
-            echo "            <li><a href=\"$item/$html_filename\">$month_name ${day_ordinal}, $year</a></li>" >> index.html
+            # Determine the base filename of the ODT file for title lookup
+            odt_base_filename=""
+            if [ -n "$odt_file" ]; then # Ensure an ODT file was actually found
+                odt_filename_full_path=$(find "$item" -maxdepth 1 -type f -name "*.odt" | head -n 1)
+                odt_base_filename=$(basename "${odt_filename_full_path%.*}")
+            fi
+
+            # Get the title from the corresponding text file in titlesOfTheMonth/
+            article_title=""
+            if [ -n "$odt_base_filename" ]; then # Only try to get title if an ODT base filename exists
+                title_file="titlesOfTheMonth/${odt_base_filename}.txt"
+                if [ -f "$title_file" ]; then
+                    article_title=$(head -n 1 "$title_file")
+                fi
+            fi
+
+            # Append the formatted date and title as a list item to the HTML file
+            # Added a conditional check to include " - $article_title" only if a title is found.
+            if [ -n "$article_title" ]; then
+                echo "            <li><a href=\"$item/$html_filename\">$month_name ${day_ordinal}, $year - $article_title</a></li>" >> index.html
+            else
+                echo "            <li><a href=\"$item/$html_filename\">$month_name ${day_ordinal}, $year</a></li>" >> index.html
+            fi
         fi
     fi
 done
@@ -152,4 +173,3 @@ cat <<EOF >> index.html
 </body>
 </html>
 EOF
-
