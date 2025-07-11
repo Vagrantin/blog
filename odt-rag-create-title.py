@@ -25,7 +25,7 @@ import ollama
 SOURCE_FOLDER = "./source"
 DONE_FOLDER = "./done"
 OUTPUT_FOLDER = "./output"
-MODEL = "mistral"
+MODEL = "qwen2:0.5b"
 EMBEDDING_MODEL = "nomic-embed-text"
 INACTIVITY_TIMEOUT = 10
 SHUTDOWN_CHECK_INTERVAL = 1
@@ -165,10 +165,13 @@ class ODTFileHandler(FileSystemEventHandler):
                 logging.warning(f"Warning: Could not pull embedding model: {e}")
 
             # 4. Create vector database
+            file_name = os.path.splitext(os.path.basename(file_path))[0]
+            collection_name = f"odt-rag-{file_name}-{int(time.time())}"
+
             vector_db = Chroma.from_documents(
                 documents=chunks,
                 embedding=OllamaEmbeddings(model=EMBEDDING_MODEL),
-                collection_name="odt-rag",
+                collection_name=collection_name,
             )
             logging.info("Done adding to vector database...")
 
@@ -178,7 +181,7 @@ class ODTFileHandler(FileSystemEventHandler):
             # Multi-query retriever for better results
             QUERY_PROMPT = PromptTemplate(
                 input_variables=["question"],
-                template="""You are very creative, and funny. You never propose the same title twice.
+                template="""You stick to the original question.
                 Original question: {question}""",
             )
 
@@ -203,7 +206,7 @@ class ODTFileHandler(FileSystemEventHandler):
 
             # 6. Process predefined questions and generate output
             questions = [
-                "Generate a concise and catchy title for the given article. Output only the title and nothing else."
+                "Generate a short and catchy title for the given article. Output only the title and nothing else."
             ]
 
             # Generate output content
@@ -213,6 +216,7 @@ class ODTFileHandler(FileSystemEventHandler):
                 try:
                     result = chain.invoke(input=question)
                     output_content.append(f"{result}")
+                    logging.info(f"Output of the LLM: {result}")
                 except Exception as e:
                     output_content.append(f"\nQ{i}: {question}")
                     output_content.append(f"A{i}: Error processing question: {str(e)}")
