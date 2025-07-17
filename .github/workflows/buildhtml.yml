@@ -62,3 +62,4 @@ jobs:
         commit_message: Daily build - Update visible articles
         add_options: '-A'
         skip_dirty_check: true
+        push_options: '--force'
