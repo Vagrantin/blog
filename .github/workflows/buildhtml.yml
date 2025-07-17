@@ -60,5 +60,3 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: Daily build - Update visible articles
-        # Only commit if there are changes
-        skip_dirty_check: false
