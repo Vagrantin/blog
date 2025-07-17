@@ -2,12 +2,9 @@
 name: Build Blog Index
 
 on:
-  schedule:
-    - cron: '0 12 * * *'  # Run daily at noon UTC
   push:
     branches:
-      - main # Still trigger on pushes to main for testing
-  workflow_dispatch:  # Allow manual triggering
+      - main # Trigger this workflow on pushes to the 'main' branch
 
 jobs:
   build:
@@ -53,13 +50,10 @@ jobs:
 
     - name: Run build script
       # Execute the buildIndexHtml.sh script.
-      # This script will generate the html files and filter by date.
+      # This script will generate the html files.
       run: ./buildIndexHtml.sh
 
     - name: Commit and Push changes
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
-        commit_message: Daily build - Update visible articles
-        add_options: '-A'
-        skip_dirty_check: true
-        push_options: '--force'
+        commit_message: Build html pages
