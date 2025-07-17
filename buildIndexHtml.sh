@@ -202,3 +202,4 @@ cat <<EOF >> index.html
 EOF
 
 echo "Build complete! Articles published up to: $current_date"
+ls -al
