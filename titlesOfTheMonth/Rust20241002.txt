@@ -1,1 +1,1 @@
-Title: "Bll Timer for High Battery Alert"
+Title: "The Rust Solution: A Battery Low Level Alert with Systemd Service"

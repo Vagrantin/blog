@@ -1,1 +1,1 @@
-Title: "Your new personal digital diary: A simple, efficient way to manage your articles through linked lists"
+Title: "Rebuilding Linked Articles Using Pandoc and GitHub Pages: A Rust Tool to Increase Automation"

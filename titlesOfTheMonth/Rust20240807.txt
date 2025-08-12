@@ -1,1 +1,1 @@
-"Breaking Goodbye to Old Days: A Comprehensive Examination of Rust 2024 Test Cases in GNU Coreutils, Testing a Limiting Software Development Model with Modern Tools"
+"Breaking Down the Code Quality: A Comprehensive Analysis of "Cargo Test" Output vs GNU Coreutils Head Version from Windows Machine, Part 2"

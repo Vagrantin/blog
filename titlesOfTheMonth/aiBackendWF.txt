@@ -1,0 +1,1 @@
+The response we then get we output it to a text file which will have the same name as the odt file for retrieval by the script which is building the HTML file that includes all the articles.\nBuildTitle.sh

@@ -1,1 +1,2 @@
-"Rust & Claude.ai: Generating SSH Sessions to Debug Code"
+Title:
+"Rust 2025: A TUI that Generates SSH Sessions One After The Other for Debugging"

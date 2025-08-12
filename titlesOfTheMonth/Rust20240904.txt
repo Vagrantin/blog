@@ -1,1 +1,1 @@
-"Cutting Edge Bug Fixing: A Look Back at GNU Head's Test Script from TDD in Clap v2"
+"Rust Bug Fixing in Debug Mode: A Tale of Testing with GNU Head and Caprock's Clap V2 Tool"
