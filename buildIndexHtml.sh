@@ -151,7 +151,8 @@ cat <<EOF > index.html
         /* Small mobile styles */
         @media screen and (max-width: 480px) {
             header {
-                height: 40vh;
+		object-fit: cover;
+		object-position: center;
                 min-height: 200px;
             }
 
