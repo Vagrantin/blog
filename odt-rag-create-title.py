@@ -206,7 +206,7 @@ class ODTFileHandler(FileSystemEventHandler):
 
             # 6. Process predefined questions and generate output
             questions = [
-                "Generate a short and catchy title for the given article. Output only the title and nothing else."
+                "Generate a short and catchy title for the given article. Output only the title in one line and nothing else."
             ]
 
             # Generate output content
