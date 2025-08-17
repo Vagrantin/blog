@@ -1,1 +1,1 @@
-"Unlocking the Power of Rust: A Journey into the World of Code, with a Passion for Learning"
+"Learning How to Love Rust: A Personal Journey with Generative AI"

@@ -1,2 +1,1 @@
-Title:
-"Rust 2025: A TUI that Generates SSH Sessions One After The Other for Debugging"
+"Breaking Down the Rust Code by Claude.ai: How the Idea of Terminal Triggering SSH Works"

@@ -1,1 +1,1 @@
-Title: "Uniquity: A Rust Algorithm Challenge"
+"Efficient Rust Code Challenge: A Comprehensive Guide on Uniqueness"

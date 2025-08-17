@@ -1,1 +1,1 @@
-"Rust Bug Fixing in Debug Mode: A Tale of Testing with GNU Head and Caprock's Clap V2 Tool"
+"Fixing Bugs with Clap V2 Test Case: A Fun Adventure of GNU Head and Cut Down Version"

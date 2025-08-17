@@ -1,1 +1,1 @@
-"Ratatui Library Improves UI Experience with Built-in AI Technologies"
+"Rust Library for Terminal UIs: A New Hope for User Interaction on Linux, macOS, Windows"
