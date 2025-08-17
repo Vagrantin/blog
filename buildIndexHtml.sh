@@ -44,60 +44,168 @@ cat <<EOF > index.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloguiBoulga</title>
-    <style>
+<style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-	    background-color:#5c5f5e;
+            background-color: #5c5f5e;
             color: white;
+            line-height: 1.6;
         }
+
         header {
-            background-image: url('nekkuma.png'); /* Replace with your image path */
+            background-image: url('nekkuma.png');
             background-size: cover;
             background-position: center;
-            height: 550px;
+            background-repeat: no-repeat;
+            height: 60vh;
+            min-height: 300px;
+            max-height: 550px;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
+
         h1 {
-            margin: 0;
+            margin: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.5em;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            text-align: center;
+            padding: 0 20px;
         }
+
         nav {
             margin: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
+
         nav ul {
             list-style-type: none;
             padding: 0;
         }
+
         nav ul li {
-            margin: 10px 0;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
+
+        nav ul li:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
         nav ul li a {
             text-decoration: none;
-            font-size: 1.2em;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             color: white;
+            display: block;
+            word-wrap: break-word;
+            line-height: 1.4;
         }
+
         nav ul li a:hover {
             color: #007BFF;
         }
+
+        /* Mobile styles */
+        @media screen and (max-width: 768px) {
+            header {
+                height: 50vh;
+                min-height: 250px;
+            }
+
+            h1 {
+                font-size: clamp(1.5rem, 6vw, 2rem);
+                margin: 15px;
+            }
+
+            nav {
+                margin: 15px;
+                padding: 0 15px;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                padding: 12px;
+            }
+
+            nav ul li a {
+                font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+                line-height: 1.5;
+            }
+        }
+
+        /* Small mobile styles */
+        @media screen and (max-width: 480px) {
+            header {
+                height: 40vh;
+                min-height: 200px;
+            }
+
+            h1 {
+                font-size: clamp(1.3rem, 7vw, 1.8rem);
+                margin: 10px;
+            }
+
+            nav {
+                margin: 10px;
+                padding: 0 10px;
+            }
+
+            nav ul li {
+                margin: 8px 0;
+                padding: 10px;
+            }
+
+            nav ul li a {
+                font-size: clamp(0.8rem, 4vw, 1rem);
+            }
+        }
+
+        /* Large screen styles */
+        @media screen and (min-width: 1200px) {
+            nav {
+                max-width: 1400px;
+            }
+
+            nav ul li a {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Ensure images don't overflow */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
-</head>
+<head>
 <body>
     <header>
     </header>
     <div>
-        <h1>Dump! Dump! Dump!</h1>
+	<h1>Dump! Dump! Dump!</h1>
     </div>
     <nav>
-        <ul>
+	<ul>
 EOF
 
 # Create a temporary file to store entries with dates for sorting
@@ -105,18 +213,18 @@ temp_file=$(mktemp)
 
 # Loop through each item in the current directory
 for item in *; do
-    # Check if the item is a directory
-    if [ -d "$item" ]; then
-        # Check if the directory name consists only of digits
-        if echo "$item" | grep -q '^[0-9]\+$'; then
-            # Check if the directory name is 8 digits (YYYYMMDD format)
-            if [ ${#item} -eq 8 ]; then
-                # Compare the directory date with current date
-                if [ "$item" -le "$current_date" ]; then
-                    echo "Processing article: $item (published - date reached)"
+	# Check if the item is a directory
+	if [ -d "$item" ]; then
+		# Check if the directory name consists only of digits
+		if echo "$item" | grep -q '^[0-9]\+$'; then
+			# Check if the directory name is 8 digits (YYYYMMDD format)
+			if [ ${#item} -eq 8 ]; then
+				# Compare the directory date with current date
+				if [ "$item" -le "$current_date" ]; then
+					echo "Processing article: $item (published - date reached)"
 
-                    # Look for an HTML file in the directory
-                    html_file=$(find "$item" -maxdepth 1 -type f -name "*.html" | head -n 1)
+		    # Look for an HTML file in the directory
+		    html_file=$(find "$item" -maxdepth 1 -type f -name "*.html" | head -n 1)
                     # Look for an ODT file in the directory
                     odt_file=$(find "$item" -maxdepth 1 -type f -name "*.odt" | head -n 1)
 
