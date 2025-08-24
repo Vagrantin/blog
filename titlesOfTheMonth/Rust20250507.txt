@@ -1,1 +1,1 @@
-"Learning How to Love Rust: A Personal Journey with Generative AI"
+"Crafting Custom Software with Rust - The Revolution in Programming Languages"

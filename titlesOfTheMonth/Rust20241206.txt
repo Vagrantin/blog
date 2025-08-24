@@ -1,1 +1,1 @@
-"Efficient Rust Code Challenge: A Comprehensive Guide on Uniqueness"
+"Uniqly Debuted: Rust's Unraveling Algorithm Unfinished"

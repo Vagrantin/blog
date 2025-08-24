@@ -1,1 +1,1 @@
-"Rust Library for Terminal UIs: A New Hope for User Interaction on Linux, macOS, Windows"
+"Rust20250205: A Rust Library For Terminal UI Creation & Real-Time Updates, Supports Linux/Mac/Windows with Built-In AI Engines"

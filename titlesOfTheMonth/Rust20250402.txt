@@ -1,1 +1,1 @@
-"Vibe Coding: A Rust Non-Developer's Journey Through the "Reality" of Programming without Programming Knowledge"
+"Rust Vibe Coding: A Tool for Productivity Review and Debugging"

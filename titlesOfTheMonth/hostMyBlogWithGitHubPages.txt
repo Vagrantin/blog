@@ -1,1 +1,1 @@
-"GitOps in Action: Building a Blog Using Docker, Pandoc, and GitHub Pages"
+"Revolutionizing Linked Blogs: Creating My Own Blog With GitHub Pages And Pandoc Tools"

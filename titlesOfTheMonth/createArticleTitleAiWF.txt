@@ -1,1 +1,1 @@
-"Automated Blogging Workflow: Qwen2 0.5B Model and LLM Integration"
+"Every Month New Titles, Qwen2 0.5B on CPU, Fast and Furious!"

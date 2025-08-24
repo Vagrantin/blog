@@ -1,1 +1,1 @@
-"Rust's Unexpected Victory over GNU Coreutils Head Version Test Case"
+"Editing Files Improves Testing Efficiency: Understanding Characters and Strings in Rust, Head Version vs GNU Coreutils 100% Pass"

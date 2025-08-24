@@ -1,1 +1,1 @@
-"Breaking Down the Rust Code by Claude.ai: How the Idea of Terminal Triggering SSH Works"
+"Securing Your Code: Using Generative AI to Boost Your Debugging Tools"
