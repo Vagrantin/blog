@@ -3,6 +3,9 @@
 # Copy the python script that will be execute remotely
 scp odt-rag-create-title.py ai:~/devouille/otoTitle
 
+# Clean up odt files on the target machine
+ssh ai "cd ~/devouille/otoTitle/source/ && rm *.odt"
+
 # Copy odt file to Ai machine for title creation
 find -type f -name "*.odt" -exec scp {} ai:~/devouille/otoTitle/source/ \;
 

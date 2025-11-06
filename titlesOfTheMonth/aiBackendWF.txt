@@ -1,1 +1,1 @@
-"AI Backend WF - Creating Titles - Step 2 of Ollama Workflow - LangChain - BuildTitle.sh Script"
+"AI Backend WF: Title Construction Process Explained - The Workflow Behind Automated Title Creation"

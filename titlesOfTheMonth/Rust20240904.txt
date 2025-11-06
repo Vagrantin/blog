@@ -1,1 +1,1 @@
-"Fixing Bugs with GNU Head: The Story of My Cutting-Down Head Training Book"
+"Breaking Barriers - A Guide to Test-Driven Development in Rust 2024 with GNU Head"

@@ -1,1 +1,1 @@
-"Rust20250205: A Rust Library For Terminal UI Creation & Real-Time Updates, Supports Linux/Mac/Windows with Built-In AI Engines"
+"RustTUIrs: A Culinary Tool for Windows 10 Users"

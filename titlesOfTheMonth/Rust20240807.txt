@@ -1,1 +1,1 @@
-"Editing Files Improves Testing Efficiency: Understanding Characters and Strings in Rust, Head Version vs GNU Coreutils 100% Pass"
+"Rust Editor's "Windows Version" Edits, GNU Coreutils Changes Triggered"

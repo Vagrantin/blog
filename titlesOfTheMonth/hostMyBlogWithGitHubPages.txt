@@ -1,1 +1,1 @@
-"Revolutionizing Linked Blogs: Creating My Own Blog With GitHub Pages And Pandoc Tools"
+"Managing Blogging with Rust Tools and Git Actions: A Step-by-step Guide"

@@ -1,1 +1,1 @@
-"Bll Timer Running at a Glance"
+"Battery Low Level: A Daily Notification App"

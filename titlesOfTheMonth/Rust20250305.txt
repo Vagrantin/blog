@@ -1,1 +1,1 @@
-"Securing Your Code: Using Generative AI to Boost Your Debugging Tools"
+"Rust 20250305: The Code Revolution: Using Windows Terminal to Triggers SSH Sessions"

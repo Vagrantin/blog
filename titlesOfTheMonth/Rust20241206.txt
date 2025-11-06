@@ -1,1 +1,1 @@
-"Uniqly Debuted: Rust's Unraveling Algorithm Unfinished"
+"Rust 2024 - A Challenge: Re-creating Uniq Output Line Counting System"

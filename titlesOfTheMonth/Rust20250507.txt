@@ -1,1 +1,1 @@
-"Crafting Custom Software with Rust - The Revolution in Programming Languages"
+"Learning Rust: A Game-Changer for Creativity"
