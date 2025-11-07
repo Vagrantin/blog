@@ -5,27 +5,9 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Rustique_un-char-ted</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="article-wrapper">
 <p>This one was very existing exercise, and I'm always surprise how good
 Rust language is. Even with the very specifics on memory safety, with
 Rust, you kind of feel at home, since it has pretty much gathered all
@@ -44,14 +26,12 @@ encoded on 1 bytes.</p>
 <p>So the game was to simulate how head is reading an UTF8
 characters</p>
 <p>For instance when requesting the 1bytes of the character Ö </p>
-<p>“echo "Öne line, four words." | head -c 1”</p>
+<p>$ echo "Öne line, four words." | head -c 1</p>
 <p>it will be printed out like this with head from coreutils �</p>
 <p>The reason is that Ö is encoded on 2 bytes so to have the full
 character with head you will need to request 2 bytes</p>
-<p>“”</p>
 <p>$ echo "Öne line, four words." | head -c 2</p>
 <p>$ Ö</p>
-<p>“”</p>
 <p>The endless story of strings</p>
 <p>The second topic which was very interesting to investigate was the
 Strings. </p>
@@ -59,7 +39,7 @@ Strings. </p>
 <p>In the first case I'm storing all of them in a vector and then
 "convert" it to a String or String slice depending on the context
 with,</p>
-<p>“String::from_utf8_lossy()”</p>
+<p>String::from_utf8_lossy()</p>
 <p>This is how it looks like:</p>
 <p><img src="./Pictures/100000000000023B0000018A7249AECCB20300A1.png"
 style="width:5.948in;height:4.1043in" /></p>
@@ -85,6 +65,5 @@ line Rust</a></p>
 <p><a
 href="https://nostarch.com/rust-programming-language-2nd-edition">The
 rust programming language</a></p>
-</div>
 </body>
 </html>
