@@ -238,6 +238,7 @@ for item in *; do
                         # and the output HTML is placed correctly within "$item".
                         cd "$item" || exit # Exit if cd fails
                         pandoc -s -f odt "$odt_filename" --extract-media=. -o "$filename.html" --css="style.css"
+			sed -i '/<style>/,/<\/style>/d' "$filename.html"
 			cp ../style.css .
                         cd .. # Navigate back to the original directory
                     fi
