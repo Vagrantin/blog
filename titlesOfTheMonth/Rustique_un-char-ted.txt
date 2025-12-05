@@ -1,1 +1,1 @@
-"Unlocking the Secrets of Rust's String Handling: The Ultimate String Adventure with Char Type and UTF8/GZip Handling"
+"Rust's Unpredictable Characters: A Text-Based Exploration with UTF8 Encoding Techniques"

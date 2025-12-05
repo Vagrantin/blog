@@ -1,1 +1,1 @@
-"Managing Blogging with Rust Tools and Git Actions: A Step-by-step Guide"
+"Vagrantin Blog: A Rust Tool to Automate Writing, Publishing and Maintaining Articles through Linked List"

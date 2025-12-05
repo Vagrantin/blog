@@ -1,1 +1,1 @@
-"RustTUIrs: A Culinary Tool for Windows 10 Users"
+"Ratutui RS: A Rust Library for Terminal User Interfaces"

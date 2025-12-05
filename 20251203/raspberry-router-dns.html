@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>raspberry-router-dns</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<h1
+id="using-a-raspberry-pi-as-a-wired-network-router-and-dns-server">Using
+a Raspberry Pi as a Wired Network Router and DNS Server</h1>
+<p><strong>Context:</strong> I’m in the process of setting up a wired
+home network, and while my cabling is ready, my network rack isn’t set
+up yet. In the meantime, I’m using my Raspberry Pi as an internal router
+for my wired machines. Here’s how I configured it to route traffic
+between my wired LAN (<em>eth0</em>) and WiFi (<em>wlan0</em>), and also
+act as a DNS server for my local network.</p>
+<h2 id="update-and-install-required-packages">1. Update and Install
+Required Packages</h2>
+<p>First, update your system and install the necessary packages:</p>
+<p><em>sudo apt update &amp;&amp; sudo apt upgrade -y</em></p>
+<p><em>sudo apt install dnsmasq iptables</em></p>
+<p><em>sudo apt install iptables-persistent</em></p>
+<h2 id="enable-ip-forwarding">2. Enable IP Forwarding</h2>
+<p>Edit <em>/etc/sysctl.conf</em> and add the following lines to enable
+IP forwarding and disable IPv6 (if not needed):</p>
+<p><em>net.ipv4.ip_forward=1</em></p>
+<p><em>net.ipv6.conf.all.disable_ipv6=1</em></p>
+<p><em>net.ipv6.conf.default.disable_ipv6=1</em></p>
+<p>Apply the changes and enable the <em>sysctl</em> service:</p>
+<p><em>sudo sysctl -p</em></p>
+<p><em>sudo systemctl enable systemd-sysctl</em></p>
+<p><em>sudo systemctl start systemd-sysctl</em></p>
+<h2 id="configure-iptables-for-nat-and-forwarding">3. Configure iptables
+for NAT and Forwarding</h2>
+<p>Set up NAT and forwarding rules:</p>
+<p><em>sudo iptables -t nat -A POSTROUTING -o wlan0 -j
+MASQUERADE</em></p>
+<p><em>sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state
+RELATED,ESTABLISHED -j ACCEPT</em></p>
+<p><em>sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT</em></p>
+<p>Save the iptables configuration to persist after reboot:</p>
+<p><em>sudo netfilter-persistent save</em></p>
+<p>At this point, your wired machines should be able to access the
+internet through the Raspberry Pi!</p>
+<h2 id="disable-wifi-power-management-for-stability">4. Disable WiFi
+Power Management for Stability</h2>
+<p>Create or edit <em>/etc/rc.local</em>:</p>
+<p><em>sudo nano /etc/rc.local</em></p>
+<p>Add the following content to disable WiFi power saving:</p>
+<p><em>#!/bin/sh -e</em></p>
+<p><em>#</em></p>
+<p><em># rc.local</em></p>
+<p><em>#</em></p>
+<p><em># This script is executed at the end of each multiuser
+runlevel.</em></p>
+<p><em># Make sure that the script will "exit 0" on success or any
+other</em></p>
+<p><em># value on error.</em></p>
+<p><em>#</em></p>
+<p><em># By default, this script does nothing.</em></p>
+<p><em># Disable WiFi power saving</em></p>
+<p><em>iwconfig wlan0 power off</em></p>
+<p><em>exit 0</em></p>
+<p>Make it executable and enable the service:</p>
+<p><em>sudo chmod +x /etc/rc.local</em></p>
+<p><em>sudo systemctl enable rc-local</em></p>
+<p><em>sudo systemctl start rc-local</em></p>
+<p>Verify the setting:</p>
+<p><em>iwconfig wlan0 | grep "Power Management"</em></p>
+<p><em> &gt; Power Management:off</em></p>
+<h2 id="ensure-ip-forwarding-persists-after-reboot">5. Ensure IP
+Forwarding Persists After Reboot</h2>
+<p>Unfortunately, IP forwarding is still being disabled at boot. To fix
+this, I created a custom service that should start late in the boot
+process to avoid the config to be overwritten:</p>
+<p>Create <em>/etc/systemd/system/late-ip-forward.service</em>:</p>
+<p><em>[Unit]</em></p>
+<p><em>Description=Set IP forwarding (late)</em></p>
+<p><em>After=network-online.target dnsmasq.service
+netfilter-persistent.service NetworkManager-wait-online.service</em></p>
+<p><em>Wants=network-online.target</em></p>
+<p><em>[Service]</em></p>
+<p><em>Type=oneshot</em></p>
+<p><em>ExecStart=/sbin/sysctl -w net.ipv4.ip_forward=1</em></p>
+<p><em>[Install]</em></p>
+<p><em>WantedBy=multi-user.target</em></p>
+<p>Enable the service:</p>
+<p><em>sudo systemctl daemon-reload</em></p>
+<p><em>sudo systemctl enable late-ip-forward.service</em></p>
+<p>Reboot your Raspberry Pi. IP forwarding is now persistent!</p>
+<h2 id="configure-dnsmasq-for-local-dns-resolution">6. Configure dnsmasq
+for Local DNS Resolution</h2>
+<p>I want my RPI to be the DNS server for my internal network, I’m using
+dnsmasq to handle that.</p>
+<p>Edit <em>/etc/dnsmasq.conf</em>:</p>
+<p><em># Listen only on the wired LAN interface (eth0)</em></p>
+<p><em>interface=eth0</em></p>
+<p><em># Specify the local domain</em></p>
+<p><em>local=/mydomain.local/</em></p>
+<p><em># Forward DNS requests for non-local domains to upstream DNS (via
+wlan0)</em></p>
+<p><em>server=1.1.1.1</em></p>
+<p><em>server=8.8.8.8</em></p>
+<p><em># Use /etc/hosts for local hostname lookup</em></p>
+<p><em>addn-hosts=/etc/hosts</em></p>
+<p>Add your local hosts to <em>/etc/hosts</em>:</p>
+<p><em>192.168.1.1 rpi.mydomain.local</em></p>
+<p><em>192.168.1.100 machine1.mydomain.local</em></p>
+<p><em><em># Add more entries as needed</em></em></p>
+<p>Restart <em>dnsmasq</em>:</p>
+<p><em>sudo systemctl restart dnsmasq</em></p>
+<p>Now, you can ping machines by their fully qualified domain names
+(FQDN):</p>
+<p><em>ping rpi.mydomain.local</em></p>
+<h2 id="simplify-access-with-search-domains">7. Simplify Access with
+Search Domains</h2>
+<p>To avoid typing the full FQDN, update your client’s network
+configuration to include the search domain. On Ubuntu (and flavors),
+edit your Netplan config (e.g.,
+<em>/etc/netplan/01-netcfg.yaml</em>):</p>
+<p><em>network:</em></p>
+<p><em> version: 2</em></p>
+<p><em> renderer: networkd</em></p>
+<p><em> ethernets:</em></p>
+<p><em> eth0:</em></p>
+<p><em> dhcp4: no</em></p>
+<p><em> addresses: [192.168.1.100/24]</em></p>
+<p><em> gateway4: 192.168.1.1</em></p>
+<p><em> nameservers:</em></p>
+<p><em> addresses: [192.168.1.1] <em># Your RPi's IP (DNS
+server)</em></em></p>
+<p><em> search: [mydomain.local]</em></p>
+<p>Apply the changes:</p>
+<p><em>sudo netplan apply</em></p>
+<p>Now, you can ping machines using just their hostnames:</p>
+<p><em>ping pi</em></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>With these steps, your Raspberry Pi is now acting as both a router
+and a DNS server for your local network. Your wired machines can access
+the internet, and you can resolve local hostnames easily. This setup is
+a great temporary solution while I’m preparing my more permanent network
+infrastructure.</p>
+</body>
+</html>

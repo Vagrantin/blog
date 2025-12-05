@@ -1,1 +1,1 @@
-"Welcome to the XCP-ng First Install: A Beginner's Guide to Building an Hypervisor Solution with Xen Orchestra"
+"Quick Start Guide: Installing XCP-NG First Install OD Document"

@@ -1,1 +1,1 @@
-"Rust 2024 - A Challenge: Re-creating Uniq Output Line Counting System"
+"Challenge Refined: A Rust Solution to the Uniqle Algorithm"

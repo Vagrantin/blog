@@ -1,1 +1,1 @@
-"Battery Low Level: A Daily Notification App"
+"High Battery Alert - Your Device Is Running Low!"
