@@ -1,1 +1,1 @@
-"Creating the Reality of Vibe Coding: The Unreveling Journey into Programming Without Programming Knowledge"
+"Vibe Coding: A Rust Non-Developer's Journey Through Software Development"

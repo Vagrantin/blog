@@ -1,1 +1,1 @@
-"Super Fast Reading of UTF8 Characters: The Rust Code Game"
+"Struggling to read characters? Learn Rust's Char-Type Encoding Techniques - Uncharted Territories!"

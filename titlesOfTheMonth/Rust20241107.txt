@@ -1,1 +1,1 @@
-Title: "AI Boosts Your Code Speed: How Using AI Enhances Your Rust Learning Path"
+"AI Enhancing Rust Learning Path, Code Counting Solution Similar to OpenAI's"

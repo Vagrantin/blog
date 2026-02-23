@@ -1,1 +1,1 @@
-"Automating Articles with a Blog Built with a Rust Tool"
+"Managing Blogging in Linkedin - Building a Simple Static Web Page with GitHub Pages"

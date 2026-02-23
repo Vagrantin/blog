@@ -1,1 +1,1 @@
-"Wireguard & DNS Update Tools: How to Make Your IoT Lab Accessible from Outside Your Local Network"
+"Wireguard Remote Access: A Lab's First Step to Home Automation and DNS Update"

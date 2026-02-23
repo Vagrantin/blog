@@ -1,1 +1,1 @@
-"The Bll Timer: A Smart Device for Low Battery Status Alert"
+"Rust on PopOS: The Powerless PC Experience with a Laptop Battery Low Notification Tool"
