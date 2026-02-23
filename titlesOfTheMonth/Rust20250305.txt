@@ -1,1 +1,1 @@
-"Unlocking the Code: The Benefits of Using Windows Terminal for Rust Development"
+"Rust Code Debugging Tips: Using Windows Terminal to Trigger Multiple SSH Sessions and Improve Debugging Methods through Claude.ai"

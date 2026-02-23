@@ -1,1 +1,1 @@
-"Wireguard Remote Access: A Lab's First Step to Home Automation and DNS Update"
+"Wireguard - A Simple Solution for Remote Access to Your Lab from Outside the Network"

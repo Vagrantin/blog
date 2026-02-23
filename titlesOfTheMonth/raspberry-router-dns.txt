@@ -1,1 +1,1 @@
-"Raspberry Router DNS Downtime Solution: A Wired Network Router's Quick Fix to Improve Stability and Security"
+"Raspberry Pi as a Wired Router and DNS Server for Local Network Setup"

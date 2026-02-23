@@ -1,1 +1,1 @@
-"Rust20250205: Cooking with Ratatui.rs - A Rust Library for Creating Terminal User Interfaces (TUIs)"
+"Ratatui: The Rust Library That Can Turn Your Terminal UIs into Animated GIFs with ASCII Style on Windows 11"

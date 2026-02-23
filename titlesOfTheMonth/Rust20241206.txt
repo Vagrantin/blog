@@ -1,1 +1,1 @@
-"Uniq Coding Rattlesnake Successes - A Rust Code Re-creation Challenge"
+"Cleanly Uniquely Unique Coding Challenge - Rust's Struggle Against Twitch Live"

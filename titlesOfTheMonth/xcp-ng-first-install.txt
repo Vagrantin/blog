@@ -1,1 +1,1 @@
-"Install XCP-ng - The Best Virtual Machine Installation Guide"
+"The Ultimate Guide to Setting Up XCP-NG's First Virtual Machine: A Step-by-step Installation Process"

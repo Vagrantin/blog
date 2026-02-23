@@ -1,1 +1,1 @@
-"Rust on PopOS: The Powerless PC Experience with a Laptop Battery Low Notification Tool"
+"Battery Low Level Notification - Running Every 30sec"

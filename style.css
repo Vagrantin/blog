@@ -12,7 +12,7 @@ html, body {
 
 /* Center the article block */
 .article-wrapper {
-  max-width: 800px;              /* wide enough for code snippets */
+  max-width: 7vw;              /* wide enough for code snippets */
   margin: 2rem auto;             /* top/bottom spacing + horizontal centering */
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0,0,0,.08);

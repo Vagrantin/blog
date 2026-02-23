@@ -1,1 +1,1 @@
-"Optimizing Headers in Rust Testing with Clap v2 - The Fix"
+Title: Fixing Bugs in Code - Result: More Clean, Clearer Version of GNU Head

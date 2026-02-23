@@ -239,6 +239,8 @@ for item in *; do
                         cd "$item" || exit # Exit if cd fails
                         pandoc -s -f odt "$odt_filename" --extract-media=. -o "$filename.html" --css="style.css"
 			sed -i '/<style>/,/<\/style>/d' "$filename.html"
+			sed -i 's|<body>|<body><div class="article-wrapper">|' "$filename.html"
+			sed -i 's|</body>|</div></body>|' "$filename.html"
 			cp ../style.css .
                         cd .. # Navigate back to the original directory
                     fi

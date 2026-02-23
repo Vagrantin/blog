@@ -25,7 +25,7 @@ import ollama
 SOURCE_FOLDER = "./source"
 DONE_FOLDER = "./done"
 OUTPUT_FOLDER = "./output"
-MODEL = "qwen2:0.5b"
+MODEL = "deepseek-r1:1.5b"
 EMBEDDING_MODEL = "nomic-embed-text"
 INACTIVITY_TIMEOUT = 10
 SHUTDOWN_CHECK_INTERVAL = 1

@@ -1,1 +1,1 @@
-"Struggling to read characters? Learn Rust's Char-Type Encoding Techniques - Uncharted Territories!"
+"Rust's Reading Challenge: A Fun Journey Through UTF8 and Char-Type Learning"
