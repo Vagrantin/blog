@@ -45,4 +45,5 @@ jobs:
         branch: publish
         create_branch: true  # Creates the publish branch if it doesn't exist yet
         skip_dirty_check: false
+        push_options: '--force'
 
