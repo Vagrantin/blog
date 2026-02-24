@@ -1,0 +1,57 @@
+/* -------------------------------------------------
+   Global page layout – centre everything
+   ------------------------------------------------- */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #5c5f5e;          /* light neutral background */
+  color: white;
+  font-family: system-ui, sans-serif;
+}
+
+/* Center the article block */
+.article-wrapper {
+  max-width: 800px;              /* wide enough for code snippets */
+  margin: 2rem auto;             /* top/bottom spacing + horizontal centering */
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  border-radius: 6px;
+  font-size: larger;
+}
+
+/* -------------------------------------------------
+   Text formatting
+   ------------------------------------------------- */
+.article-wrapper h1,
+.article-wrapper h2,
+.article-wrapper h3 {
+  text-align: center;            /* headings look nicer centered */
+  margin-top: 1.5rem;
+}
+
+.article-wrapper p {
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+/* -------------------------------------------------
+   Images – centre and keep within the article width
+   ------------------------------------------------- */
+.article-wrapper img {
+  display: block;                /* removes inline‑gap whitespace */
+  max-width: 100%;               /* never overflow the wrapper */
+  height: auto;
+  margin: 1.5rem auto;           /* vertical space + horizontal centering */
+}
+
+/* Optional: caption styling if you use <figure> */
+.article-wrapper figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+.article-wrapper figcaption {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.4rem;
+}

@@ -1,0 +1,1 @@
+"XCP-ng First Install: A Guide to Optimizing Storage Usage and Improving Performance through Thin Provisioning"

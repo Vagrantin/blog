@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>hostMyBlogWithGitHubPages</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<h1 id="my-blog">My Blog</h1>
+<p>Managing articles through linked is quite cumbersome, and even if
+it's better than posts, I still find them quickly lost in the noise of
+LinkedIn, not really simple to access for management.</p>
+<p>So I have decided to build <strong>my own blog</strong>.</p>
+<p>I didn’t wanted a complex solution that I’d have to heavily maintain,
+therefore I decided to use GitHub Pages to publish my articles.</p>
+<p>In order to easily and efficiently publish those articles, I’m using
+GitHub Actions to build this simple static web page.</p>
+<p>The workflow is quite simple yet efficient.</p>
+<p>I’m writing my articles in <strong>LibreOffice
+<strong>writer</strong></strong>, which I save as ODT format.</p>
+<p>Once my article is complete, I commit it and push it to my GitHub
+repository.</p>
+<p>This triggers a GitHub Action which converts the ODT files to HTML,
+then updates <em>index.html</em> to add all the articles.</p>
+<p>The blog ( Index.html ) is simple rebuilt at each push to my
+repository.</p>
+<h2 id="heres-my-workflow-in-detail">Here’s my workflow in detail:</h2>
+<p>I couldn’t resist creating a Rust tool to enable more automation.</p>
+<h3 id="step-1"><strong>Step 1:</strong></h3>
+<p>With my Rust tool, I create the architecture and a template ODT
+file.</p>
+<p>It:</p>
+<ul>
+<li>Initializes a folder with the date of the first Wednesday of the
+following month.</li>
+<li>Asks for a file name.</li>
+<li>Opens <strong>LibreOffice</strong> with the new ODT file.</li>
+</ul>
+<p>https://github.com/Vagrantin/odt-cli-creator</p>
+<h3 id="step-2"><strong>Step 2:</strong></h3>
+<p>I’m writing my article in <strong>LibreOffice
+<strong>Writer.</strong></strong></p>
+<h3 id="step-3"><strong>Step 3:</strong></h3>
+<p>Once I’m happy with the article, saves it as LibreOffice standard
+format “odt” file, then commit everything and push it to my
+repository.</p>
+<h3 id="step-4-github-action"><strong>Step 4: GitHub
+Action</strong></h3>
+<p>Once pushed to main:</p>
+<ul>
+<li>GitHub Action checks out the repository.</li>
+<li>Downloads and installs <strong>Pandoc</strong>.</li>
+<li>Triggers a script to build the blog.</li>
+<li>Commits and pushes back to publish the rebuilt HTML files.</li>
+</ul>
+<h2 id="the-script-to-build-the-blog">The script to build the blog:</h2>
+<ul>
+<li>First step: delete all existing HTML files (they are going to be
+rebuilt afterwards).</li>
+<li>The index HTML main page is then recreated using
+<strong>Pandoc</strong>, adding all articles one by one by their
+publication date.</li>
+<li>Each folder is dated with its publication date. I’m just converting
+the folder’s name into a nicer format for the blog.</li>
+</ul>
+<p>Then another GitHub Action is triggered a few minutes later to deploy
+the repository for <strong>Github Pages</strong>.</p>
+<p>That’s it — simple and easy to maintain.</p>
+<h2 id="next-steps">Next steps:</h2>
+<p>I will improve the design and the conversion to make the articles
+easier fun to read. Will probably add some titles along side the date as
+well. Once I understand how it works link it to a dedicated domain
+name.</p>
+<p>I hope you will enjoy reading them.</p>
+<p>My blog is accessible here:</p>
+<p><a
+href="https://vagrantin.github.io/blog/">https://vagrantin.github.io/blog/</a></p>
+<p>With kind regards,</p>
+<p>Matthieu.</p>
+</body>
+</html>

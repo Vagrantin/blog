@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>aiBackendWF</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<h1 id="my-auto-titles-part-2">My auto titles – Part 2</h1>
+<h1 id="the-ollama-backend-workflow">The Ollama backend workflow</h1>
+<p>Last month, we’ve talked about the workflow on my dev machine side,
+this month we are going to look at the backend side of this
+workflow.</p>
+<p>For the automatic title creation workflow, I have setup a local LLM
+workflow using Ollama and lang-chain</p>
+<h2 id="steps">Steps</h2>
+<p>0 - Install the VM</p>
+<p>1 - Install Ollama</p>
+<p>2 - Download models from Ollama repo</p>
+<p>3 - install LangChain</p>
+<p>4 - Build the python script to orchestrate the workflow</p>
+<p>5 - Configure ssh with key to automate the work</p>
+<h2 id="install-vm">Install VM</h2>
+<p>I recommend to run this on a VM, at least for those 4 reasons,</p>
+<p>1 - Separate the tasks</p>
+<p>2 - Avoid cluttering your own machine </p>
+<p>3 - AI workload is quite CPU and/or GPU intensive</p>
+<p>4 - Reduce security risks</p>
+<p>Installing a VM is out of the scope of this article, also you can do
+it in any preferred way you wish and use the vendor you are the most
+comfortable with, VirtualBox, Vmware Workstation, XCP-ng, Proxmox and so
+on. </p>
+<p>On my side I have an XCP-ng host, on which I’m deploying my Virtual
+machines.</p>
+<p>At the end of the day you need a machine running Linux as this is
+what I’m using to show the steps in this article.</p>
+<p>This is not the focus for today, so I will not go to the VM
+deployment details, in future articles I will propose dedicated articles
+for XCP-ng set up and VM deployments.</p>
+<h2 id="install-ollama">Install Ollama</h2>
+<p>Once your Linux host is ready,you need to get the install command
+from the ollama.com website. </p>
+<p>At the time of writing, this goes through an install script that can
+be trigger after downloading it.</p>
+<p><img src="./Pictures/10000000000002B20000003B3D5F59578608D0CE.png"
+style="width:6.9252in;height:0.4799in" /></p>
+<p>I strongly recommend to read any script you download from the net,
+prior running them. This is a basic sanity check to avoid surprise or
+compromising your machine.</p>
+<p>Once Ollama is install you can first check that everything is fine by
+checking the version.</p>
+<p><img src="./Pictures/100000000000016E0000003539E99B1ADFF2577A.png"
+style="width:3.8118in;height:0.552in" /></p>
+<p>As you can see, I’m using Ollama version 0.9.6</p>
+<p>PS: to upgrade Ollama, you can use the same command from the Ollama
+website.</p>
+<h3 id="download-model">Download model</h3>
+<p>You can now download any model you want from <a
+href="https://ollama.com/search">Ollama Library</a> </p>
+<p>For instance you would like the <a
+href="https://ollama.com/library/gemma3n">Gemma3n</a>, you can download
+it with this command</p>
+<p><img src="./Pictures/10000000000007EF000000CF0B25146A1EF59414.png"
+style="width:6.9252in;height:0.7043in" /></p>
+<h2 id="install-langchain">Install LangChain</h2>
+<p>LangChain is a framework designed to assist developers in building
+applications that utilize large language models. </p>
+<p>On PopOS ( Debian/Ubuntu downstream distribution), you will need to
+install python and pip python virtual environment, then you can install
+LangChain through pip.</p>
+<p>This may divergent depending on your distribution.</p>
+<p><img src="./Pictures/10000000000003030000001F5182AF2C5F5CBD0C.png"
+style="width:6.9252in;height:0.2783in" /></p>
+<p><img src="./Pictures/10000000000001B800000017BF93C03827E7746C.png"
+style="width:4.5827in;height:0.2398in" /></p>
+<p>Then I’m creating a python environment for LangChain</p>
+<p><img src="./Pictures/1000000000000214000000268210EF68C3905932.png"
+style="width:5.5409in;height:0.3957in" /></p>
+<p>I can finally source it prior running my python script that uses
+LangChain framework</p>
+<p><img src="./Pictures/100000000000022900000035AE5740088D1A45B9.png"
+style="width:5.7598in;height:0.552in" /></p>
+<h2 id="python-script-that-run-the-ai-workflow">Python script that run
+the Ai workflow</h2>
+<p>You will find the script in my GitHub repo, the link is available at
+the end of this article.</p>
+<p>This script when being trigger is looking for odt files in a watch
+folder, it will monitor the folder for new files until the script is
+terminated.</p>
+<p>Once all odt files has been detected, it will process them one by
+one.</p>
+<h3
+id="odt-processing-through-llm-using-rag-retrieval-augmented-generation">Odt
+processing through LLM using RAG ( Retrieval Augmented Generation )</h3>
+<p>Disclosure: I don’t really know what I’m doing here, this is my
+interpretation of the LangChain workflow.</p>
+<p>I may and probably are wrong in some concept or interpretation.</p>
+<p>The way it’s done here, is that the file is split-ed in chunk then
+imported in a vector database (later I will use the term “db”) using an
+embedding model in my case I’m using “nomic-embed-text”.</p>
+<p>I import each file in a different collection in the vector db to make
+sure the context is of the current file being imported.</p>
+<p><img src="./Pictures/10000000000002E6000000ED84B7363104A2E5A4.png"
+style="width:6.9252in;height:2.211in" /></p>
+<p>I encounter this issue where in my original testing all my files
+where imported in the same collection consequently the context was
+completely polluted and the output of the LLM was base on all my
+articles, ending up with the same title for different articles.</p>
+<h3 id="in-high-level-is-what-is-going-on-here">In high level is what is
+going on here:</h3>
+<p>We build the context for the LLM at this stage.</p>
+<p>By the way not sure I need MultiQueryRetreiver, but that’s working
+fine for me so far.</p>
+<p>From my understanding the MultiQueryRetreiver goal is to improve
+results by generating several questions based on the original prompt and
+adjusted within the boundary of the template.</p>
+<p>In my case I tell the LLM to exactly stick to the original question,
+which seems to defeat the purpose of this tool.</p>
+<p>Anyway this is what I want for now, meaning I don’t want the LLM to
+get too creative and produce a title and only that.</p>
+<p><img src="./Pictures/1000000000000277000000EE4285C3B35EF07982.png"
+style="width:6.572in;height:2.4783in" /></p>
+<p>We make sure the LLM doesn’t go out of the context, in our case here
+it is the current odt document in the collection in the Vector db.</p>
+<p><img src="./Pictures/100000000000032A0000008F43D936161F6EA610.png"
+style="width:6.9252in;height:1.222in" /></p>
+<p>Based on the context and rules built above we ask the question to the
+LLM to get what we want</p>
+<p><img src="./Pictures/100000000000047F0000008153D0AB08CB15FEE2.png"
+style="width:6.9252in;height:0.7756in" /></p>
+<h3 id="output-the-response">Output the response</h3>
+<p>Finally, the response provided by the LLM, we output it to a text
+file which will have the same filename as the odt file. This is for the
+script which is building the HTML file to be able to reconciliate both
+the odt file with the article and the txt file with the the title.</p>
+<h2 id="buildtitle.sh">BuildTitle.sh </h2>
+<p>As explain in last month article we then copy back the output files
+to insert the titles for each article.</p>
+<p>Ssh authentication with key</p>
+<p>This is quite easy to do and very usefull when you need to remote
+through ssh regularly certain machine or like for my current workflow
+you need to ssh some machines and would like to authenticate without
+password.</p>
+<p>First if you don’t have one you need to create an ssh key on your
+client machine.</p>
+<p><img src="./Pictures/10000000000001CA0000001E2F704B7532494513.png"
+style="width:4.7701in;height:0.3126in" /></p>
+<p>You will be ask where you want to save the key and add a passphrase
+if you want to it is recommended to do so but can be problematic for
+certain workflow.</p>
+<p><img src="./Pictures/10000000000002BF000001CBE7DFF0EF397F8A83.png"
+style="width:6.9252in;height:4.5217in" />Ps: this key has been
+delete</p>
+<p>You can then copy the public key to the target server</p>
+<p><img src="./Pictures/10000000000001EE0000001710A2B221B0EFBF7B.png"
+style="width:5.1453in;height:0.2398in" /></p>
+<p>I have also configured in my ssh config file the IP of the target
+server and the user name to authenticate.</p>
+<p><img src="./Pictures/1000000000000158000000503A6CCAADD6B99853.png"
+style="width:3.5827in;height:0.8335in" /></p>
+<p>Hope your enjoying this, and will see you next month !</p>
+<p>With kind regards</p>
+<p>Matthieu</p>
+<p>Github repo: https://github.com/Vagrantin/blog</p>
+</body>
+</html>
