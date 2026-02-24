@@ -62,3 +62,8 @@ jobs:
         commit_message: Daily build - Update visible articles
         # Only commit if there are changes
         skip_dirty_check: false
+
+    - name: Tag commit for publish
+      run: |
+        git tag -f publish
+        git push origin publish --force
