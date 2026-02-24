@@ -1,6 +1,5 @@
 # .github/workflows/build-blog.yml
 name: Build Blog Index
-
 on:
   schedule:
     - cron: '0 12 * * *'  # Run daily at noon UTC
@@ -8,62 +7,42 @@ on:
     branches:
       - main # Still trigger on pushes to main for testing
   workflow_dispatch:  # Allow manual triggering
-
 jobs:
   build:
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
-
     permissions:
       contents: write
-
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4 # Action to check out your repository code
+      uses: actions/checkout@v4
       with:
-        ref: ${{ github.head_ref }}
+        ref: main
+        fetch-depth: 0  # Fetch full history so we can push to other branches
 
     - name: Download and Install Pandoc 3.7.0.2
-      # Download the specific .deb package and install it using dpkg.
       run: |
-        # Define the URL for the Pandoc .deb package
         PANDOC_DEB_URL="https://github.com/jgm/pandoc/releases/download/3.7.0.2/pandoc-3.7.0.2-1-amd64.deb"
-        # Define the filename for the downloaded package
         PANDOC_DEB_FILE="pandoc-3.7.0.2-1-amd64.deb"
-
         echo "Downloading Pandoc from: $PANDOC_DEB_URL"
-        # Use wget to download the .deb package. The -O flag saves it with a specified name.
         wget "$PANDOC_DEB_URL" -O "$PANDOC_DEB_FILE"
-
         echo "Installing Pandoc using dpkg..."
-        # Install the downloaded .deb package using dpkg.
-        # -i flag indicates install. sudo is required for dpkg.
         sudo dpkg -i "$PANDOC_DEB_FILE"
-
         echo "Verifying Pandoc installation..."
-        # Verify that Pandoc is installed and its version is correct
         pandoc --version
-
         echo "Removing downloaded Pandoc .deb package..."
-        # Remove the downloaded .deb package to clean up the runner's workspace.
         rm "$PANDOC_DEB_FILE"
 
     - name: Make build script executable
-      # Ensure the shell script has execute permissions before running it.
       run: chmod +x buildIndexHtml.sh
 
     - name: Run build script
-      # Execute the buildIndexHtml.sh script.
-      # This script will generate the html files and filter by date.
       run: ./buildIndexHtml.sh
 
-    - name: Commit and Push changes
+    - name: Commit and Push changes to publish branch
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: Daily build - Update visible articles
-        # Only commit if there are changes
+        branch: publish
+        create_branch: true  # Creates the publish branch if it doesn't exist yet
         skip_dirty_check: false
 
-    - name: Tag commit for publish
-      run: |
-        git tag -f publish
-        git push origin publish --force
