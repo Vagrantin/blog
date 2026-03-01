@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Rust20240807</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body><div class="article-wrapper">
+<h1 id="the-head-on-the-read-block">The head on the read block</h1>
+<p>I have not finished to put everything together also I’m getting
+there.</p>
+<p>Here is the current status of the “cargo test” output, which is
+testing my code against the expected output provided.</p>
+<p><img src="./Pictures/10000000000004190000019C3CC0D22BDFF8C067.png"
+style="width:6.9252in;height:2.7193in" /></p>
+<p>In a nutshell some of the failed test will need more investigations
+to be fixed since the are related how characters and strings are
+interpreted in Rust. This potentially will require a redesign of my
+program.</p>
+<p>One failure is more personal interpretation of the expected output,
+this is the “skips_bad_file”</p>
+<p>Concretely this is the expected output by the tests cases:</p>
+<p><img src="./Pictures/10000000000002CB0000006F19D84F6489BCED58.png"
+style="width:6.9252in;height:1.0752in" /></p>
+<p>This is the output of my version of head</p>
+<p><img src="./Pictures/10000000000002720000004601780FA891A2A425.png"
+style="width:6.5193in;height:0.7283in" /></p>
+<p>And this is the output of the GNU coreutils head version</p>
+<p><img src="./Pictures/10000000000004AE0000008382393BF98B07E164.png"
+style="width:6.9252in;height:0.7563in" /></p>
+<p>Also, I don’t understand the expected output by the test cases, for
+the sake of getting 100% pass of the test, I will fix my code to match
+the expected output.</p>
+<p>And I will probably write a new test that match GNU Coreutils head
+version.</p>
+<p>This shows one of the limit of TDD model regarding development, I
+have the feeling this is good for University, PhD or white paper but not
+yet convinced this is very efficient to apply in a production pipeline.
+I think tests should be written along the way to meet the expectation of
+the production and not only the expectation of the developer which
+doesn’t have the same perspective, I’m digressing and that’s another
+topic on it’s own that I may address in 20 years when I have more
+experience on the subject.</p>
+<h1 id="back-to-our-investigation">Back to our investigation</h1>
+<p>From the failed test above, let’s start from the bottom, related to
+the “three” tests,</p>
+<p>This is going to be an interesting investigation because most of the
+tests failed for “three”. This file being part of the “multiple_files”
+test case once this is fixed I should have a good proportion of my
+remaining failing tests to pass.</p>
+<p><img src="./Pictures/1000000000000172000000F6261356188F999449.png"
+style="width:3.8535in;height:2.5618in" /></p>
+<p>Let’s look at this case through “multiple_files” failed test</p>
+<p><img src="./Pictures/10000000000003F500000183FA2E644017ED1BF6.png"
+style="width:6.9252in;height:2.6453in" /></p>
+<p>This is the output of my version of head</p>
+<p><img src="./Pictures/10000000000006030000020CC9ACC1C606F5C988.png"
+style="width:6.9252in;height:2.3575in" /></p>
+<p>This this the output of GNU coreutils head.</p>
+<p><img src="./Pictures/10000000000005680000020B839A6164216D8951.png"
+style="width:6.9252in;height:2.6161in" /></p>
+<p>Running both in a bash shell, visually I don’t see any differences
+but the “cargo test” is failing.</p>
+<p>Obviously, I have an issue where the output is not strictly the
+same.</p>
+<p>Doing a diff of both output is effectively reporting a difference on
+lines 11 and 12, even if it is not visually reported in my bash
+output.</p>
+<p><img src="./Pictures/10000000000001AE0000008F00B7F54216DC6942.png"
+style="width:4.4783in;height:1.4898in" /></p>
+<p>Line count of each version of both output </p>
+<p><img src="./Pictures/10000000000001AF00000055665C8B501DA82B0B.png"
+style="width:4.489in;height:0.8846in" /></p>
+<p>I did a test where I’m converting to hexadecimal both output, I do
+see differences but this time at different place of the files 11 and 19,
+which doesn’t match the diff above which is on line 11 and 12</p>
+<p><img src="./Pictures/10000000000002EC000001AD72C1A2983A245253.png"
+style="width:6.9252in;height:3.9717in" /></p>
+<p>Line count of each hexadecimal version of both output </p>
+<p><img src="./Pictures/10000000000001E10000005B79EC623040311691.png"
+style="width:5.0098in;height:0.948in" /></p>
+<p>The Hexadecimal output is not really interesting in this case, and
+doesn't really help me because I’m not able to interpret it correctly to
+understand what is my issue.</p>
+<p>So, let’s take another path, i have opened both output in my vim
+editor and show all non-printable characters. </p>
+<p>This is the output of my rust version of head</p>
+<p><img src="./Pictures/10000000000001A900000203BA96E04ED8CA5A8D.png"
+style="width:4.4264in;height:5.3638in" /></p>
+<p>This is the version of GNU coreutils head</p>
+<p><img src="./Pictures/10000000000001970000020519708EF13C84FA03.png"
+style="width:4.239in;height:5.3846in" /></p>
+<p>Interesting to see that we have a character “^M” at the end of two
+lines that I don’t have in my output.</p>
+<p>Let’s have a look at the original source file on which I’m running
+both “head”</p>
+<p>Tada !</p>
+<p><img src="./Pictures/100000000000018F00000077F0099C5D96CD15F4.png"
+style="width:4.1555in;height:1.2398in" /></p>
+<p>Doing googling ( old school :D ) this character “^M” is the way for
+vim to represent the Windows newline character which is a combination of
+two characters “0xD 0xA”, where in UNIX the new line character is
+“0xA”.</p>
+<p>So this means this file has been edited at some point on a Windows
+machine.</p>
+<p>And the GNU Coreutils head version is keeping it in the output where
+my Rust version doesn’t.</p>
+<p>At first I would consider this is better to strip out this
+unnecessary character, but one can argue that doing so I’m altering the
+original file which could have been built this way intentionally.</p>
+<p>This is quite a specific use case, also I’m interested to see if I
+can manage to comply to the GNU coreutils head version and pass around
+all the characters.</p>
+<p>This is for the next round.</p>
+<p>See you there !</p>
+<p>With kind regards</p>
+</div></body>
+</html>
