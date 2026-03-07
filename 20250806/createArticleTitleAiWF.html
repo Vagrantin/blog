@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>createArticleTitleAiWF</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body><div class="article-wrapper">
+<h1 id="my-auto-titles-part-1">My auto titles – Part 1</h1>
+<p>Now that I have setup a my workflow to publish to Github page my
+blog.</p>
+<p>I wanted to improve it a bit by adding titles to each blog post.</p>
+<p>For this, as this is a trend in my recent learning journey, I have
+decided to use LLM to create titles automatically.</p>
+<p>On top of that to be an learning experience, I have build a workflow
+using local AI to automatically generate the blog posts titles each time
+I’m rebuilding the my blog.</p>
+<p>Since I fully rebuild my blog every month when I publish a new post.
+We will have new titles every month :D</p>
+<p>In this post I would like to guide through the high level of the
+workflow and then next month will look at the back-end using ollama and
+qwen2 0.5B Model.</p>
+<h2 id="how-does-this-work">How does this work ?</h2>
+<h3 id="ollama-integration">Ollama integration</h3>
+<p>In term of infrastructure I have my local machine on which I’m doing
+all my dev.</p>
+<p>And I have a VM on a separate machine which is running the title
+generation workflow.</p>
+<p>Essentially, all my articles are written in Libre Office.</p>
+<p>Once, I’m fine with my article, I have a script which push all the
+odt files to a watch-folder on my VM.</p>
+<p>Then, I remote execute on my VM a python script which, with Ollama
+automatically triggering the title generation. For each odt file a text
+file with the same file-name is created and contains the article
+title.</p>
+<p>I import back all those text files to my local machine.</p>
+<p><img src="./Pictures/10000000000003CB0000019C306E127F5CDE16FC.png"
+style="width:6.9252in;height:2.9382in" /></p>
+<h3 id="blog-building">Blog building</h3>
+<p>I have then updated my bash script responsible for re-building the
+HTML page each time I’m committing to my GitHub repo.</p>
+<p>In this build step, I’m now comparing the filename of the odt and the
+filename of the txt. </p>
+<p>When they match, I’m reading the content of the txt file using the
+“head”. </p>
+<p>And append the title to publication date.</p>
+<p>Here is how this part of the code looks:</p>
+<p><img src="./Pictures/10000000000005DD0000021FD0E28905CFBBBC7C.png"
+style="width:6.9252in;height:2.5047in" /></p>
+<h2 id="every-month-new-titles">Every month new titles !</h2>
+<p>I have tested several models and end up selecting for now qwen2 0.5B
+model. The titles are a bit weird but it has the merit to be quite fast
+to run on CPU, I’m not using GPU for inference for now. Gemma3n is very
+good but much slower to run.</p>
+<p>Will probably change the model time to time and improve this workflow
+in the future.</p>
+<p>I find it funny to have a new title every month for every article.
+And with this workflow this is quite straight forward to automatically
+create those titles.</p>
+<p>This had a very good advantage to get me up to speed on playing with
+ollama and offline LLM, I have so much more workflow I would like to put
+it place this is going to be exciting !</p>
+<p>Can’t wait to tell you about it !</p>
+<p>Next time we will go through the back-end which is the title workflow
+creation, hope you will enjoy the read.</p>
+<p>If you want to have a look at the code as usual.</p>
+<p>https://github.com/Vagrantin/blog</p>
+<p>With kind regards.</p>
+<p>Matthieu.</p>
+</div></body>
+</html>

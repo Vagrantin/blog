@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>xcp-ng-first-install</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body><div class="article-wrapper">
+<p>XCP-ng getting started</p>
+<p>This month, I would like to show you how to set up your first XCP-ng
+instance.</p>
+<p>XCP-ng is my Hypervisor of choice, I have been using for years now at
+work.</p>
+<p>At my company, this is our solution for our lab in APAC and this is a
+rock solid solution. I have never experienced any issue with it except
+when disks are failing on us. So no issues with XCP-NG but don’t trust
+your hardware especially the disks which will fail one day !</p>
+<p>Few years ago XCP-NG was not as intuitive as the other hypervisor to
+get started Vmware Esxi was very easy to use and really good solution.
+This is not an option anymore as Qualcomm as decided to target only Tier
+1 market. Proxmox is very well known in the homelaber community but I
+have never tested it.</p>
+<p>Today XCP-NG, with XO-LITE and Xen Orchestra ( aka XOA ) is now
+getting much easier to install and maintain a single node or manage
+multiple nodes.</p>
+<p>This is what I would like to show you.</p>
+<h1 id="high-level-infra">High level infra</h1>
+<p>In simple architecture for an home lab as of today you will need to
+install XCP-ng and then deploy Xen Orchestra.</p>
+<p>XCP-ng is the hypervisor which will host your Virtual machines and
+XOA is the layer that permits you to deploy, configure, monitor your
+XCP-ng hosts and Virtual machines.</p>
+<p>XO lite is a built-in management tool for a single XCP-ng machine you
+can also deploy XOA from it.</p>
+<p>This is not clear up what level of feature Vates itend to go to for
+XO lite. So far as I know the goal of this version is to provide a
+single node only capable solution to deploy VMs, and administer the node
+on which it is running on. This should be good enough for an home-laber
+that don’t need to run several XCP-ng nodes ( machines ) .</p>
+<p>That said, this is still a long way to be done. This is still a work
+in progress.</p>
+<p>From my initial testing with XO lite you can deploy XOA full version
+and perform only basic configuration. </p>
+<p>You’ll find lot’s of button that don’t work and teasing you future
+features.</p>
+<p>With this is mind as of now the main route for now is once you have
+installed XCP-ng on your machine you will deploy XOA, from XO lite
+directly.</p>
+<p>XOA is web the based application that you will have to deploy as a
+virtual machine in XCP-ng to administer your XCP-ng and VMs
+infrastructure.</p>
+<p>Now let’s get started with the installation of of XCP-ng.</p>
+<h1 id="install-steps">Install steps</h1>
+<h2 id="install-xcp-ng">Install XCP-ng</h2>
+<p>First you need to download the ISO image</p>
+<p><img src="./Pictures/100000000000043A00000215013082EFF06616B3.png"
+style="width:6.9252in;height:3.411in" /></p>
+<p><img src="./Pictures/10000000000004E900000236D1FD179891452CA5.png"
+style="width:6.9252in;height:3.1181in" /></p>
+<p>Once the image has been downloaded, if your Linux distribution
+doesn’t mount automatically your USB key ( which is good for a security
+stand point ), in a terminal run “sudo dmesg -Tw” then plug your USB
+stick.</p>
+<p>With this command you will see on which device your USB stick has
+been detected.</p>
+<p>You can stop dmesg with the shortcut key “Ctrl + c”, you will then
+return to the terminal prompt.</p>
+<p>If your USB key has been automatically mounted, un-mount it with the
+command “eject” for example if your USB has been mounted in the /media
+folder, you can do “eject /<em>media”</em></p>
+<p>!!!After the next step everything on the USB will be erased!!!</p>
+<p>The command has been provided on XCP-ng website, I put it here again
+for ease, adjust the XCP-ng ISO filename with the version you have
+downloaded.</p>
+<p>“sudo dd if=xcp-ng-8.3.0-20250606.iso of=/dev/sdX bs=8M oflag=direct
+“</p>
+<p>Double check your sdX to avoid erasing the wrong device, the X should
+be replaced with the letter your have seen showing up in the dmesg
+output.</p>
+<p>Wait for the copy to finish, it may take sometimes depending on the
+performance of the USB key.</p>
+<p>Once key is ready we can go through the installation step.</p>
+<h3 id="install-xcp-ng-on-your-machine">Install XCP-ng on your
+machine</h3>
+<p>XCP-ng being a Hypervisor type 1, it is design to be the only
+distribution to be installed on your machine, on my side I have not
+tested any kind of dual boot by installing it on a different disk along
+side another OS, this is not a something a would recommend unless you
+want to tinker.</p>
+<p>We will go for a standard install, we may review in the future some
+specific case if they arise for my needs.</p>
+<p>Plug your USB key with the XCP-ng image to your machine.</p>
+<p>You should then be able to boot the USB key in my case I hit the
+“Del” key then in the Bios, I select the USB Key to boot from.</p>
+<p>PS: Apologize for the quality of the images, those are photos taken
+with my smartphone.</p>
+<p><img src="./Pictures/10000000000006000000040001F14C1BA2EC342B.png"
+style="width:6.9252in;height:4.6165in" /><br />
+<em>PS: This splash screen is from a photo and requested ChatGPT to
+recreate the image as a screenshot.</em><br />
+</p>
+<p>To go for an install, press the &lt;ENTER&gt;.<br />
+<br />
+</p>
+<p><img src="./Pictures/100000000000036E0000029E2C822C9C99284027.jpg"
+style="width:6.9252in;height:5.2839in" /></p>
+<p>Select your preferred keyboard layout.</p>
+<p>@Vates team, if anyone see this article one day please, add the bépo
+layout in this list, that would be awesome !</p>
+<p><img src="./Pictures/1000000000000482000002D342A508791F2A9F4E.jpg"
+style="width:6.9252in;height:4.3382in" /></p>
+<p>This steps warns you that you are going to totally erase any data on
+your disks.</p>
+<p><img src="./Pictures/1000000000000283000001865D3903B8933BD8FE.jpg"
+style="width:6.9252in;height:4.2in" /></p>
+<p>This is the steps, were you have to agree with the End User
+Agreement.</p>
+<p>Even if nobody reads it, would be nice to have access to it in some
+way before accepting it.</p>
+<p>Here looks like we have to Accept the EUA, install XCP-ng to be able
+to read the agreement...</p>
+<p><img src="./Pictures/1000000000000412000002AE57DCDC6A86D3420D.jpg"
+style="width:6.9252in;height:4.5591in" /></p>
+<p>If you do a brand new install you will not have this screenshot, it
+shows up only if an XCP-ng installation already exist. This is my case
+on this machine XCP-ng is already install hence the warning before going
+ahead in the installation steps.</p>
+<p><img src="./Pictures/100000000000041E0000024B7E17A0B88CC16B5E.jpg"
+style="width:6.9252in;height:3.8563in" /></p>
+<p>My machine is quite old and the UEFI mode is not working for USB
+boot. You shouldn’t have this message in any recent machine. Saying that
+the Bios mode does still work with XCP-ng 8.3 which is good news for
+backward compatibility even if it is deprecated.</p>
+<p><img src="./Pictures/100000000000041C00000293D23DB1CE068DE3B0.jpg"
+style="width:6.9252in;height:4.3374in" /></p>
+<p>At this stage you will select on which disk you want to install
+XCP-ng, in my case I have only on disk so the choice is easy :D</p>
+<p><img src="./Pictures/10000000000004E8000002CD174ED06CD93F7C46.jpg"
+style="width:6.9252in;height:3.9528in" /></p>
+<p>Here you will have to choose, on which disk you want to store you
+VMs.</p>
+<p>Here as well, I only have one disk as the other one is the USB key
+containing the XCP-ng Installer, this will not be an option for storing
+VMs :D</p>
+<p><img src="./Pictures/100000000000036C000001F6781D9A5C4F65AB56.jpg"
+style="width:6.9252in;height:3.9681in" /></p>
+<p>At this step you need to choose which Storage type you want to
+use.</p>
+<p>In short explanation:</p>
+<p>EXT is best to use less storage space and LVM is best for virtual
+machine performances but use more disk space.</p>
+<p>Long explanation:</p>
+<p>Thin provisioning means that XCP-ng when it will create virtual disks
+for your VMs this will only use the storage space that your data in the
+VM actually use, for instance if you create a Virtual disk of 1TB and
+put on it 20GB on data, the corresponding disk file will take around
+20GB of actual disk space on your host.</p>
+<ul>
+<li>The Inconvenient it will impact the performances of your machine as
+it needs to resize the physical file that represent your disk when
+adding new data.</li>
+<li>The advantage this is much better to control the storage usage and
+avoid cluttering your host drive with almost empty virtual drives
+file.</li>
+</ul>
+<p><em>By experience this type of provision is good enough for an
+homelaber or a test lab en a dev/test environment which is not
+test/validating any performance related scenario.</em></p>
+<p>Thick provisioning will actually reserve all the space as soon as the
+disk is created whatever the quantity of data you have in the disk. If
+you create a thick provisioned disk of 1TB, this will actually reserve
+this amount of data, even if you have only 20GB on effective data in the
+Virtual disk on your VM.</p>
+<ul>
+<li>The inconvenient it will take much more space on your storage and
+can be an issue when you are limited in disk space.</li>
+<li>The advantage is that it improves the performances, since it doesn’t
+have to grow the physical file that represent your disk on the host.
+</li>
+</ul>
+<p><em>I would recommend this model in <em>production</em> to make sure
+you don’t impact the performance and reduce any application performances
+related to the expansion of the physical file.</em></p>
+<p><em>You can start small and extend the Disk size from XOA
+afterward.</em></p>
+<p><img src="./Pictures/100000000000036F000002547E29A6C9B5823A48.jpg"
+style="width:6.9252in;height:4.6953in" /></p>
+<p>In this stage you can select from where you want to get the
+installation files, in my case, I always used local media which means
+the installer will get the installation files from the USB Key.</p>
+<p><img src="./Pictures/10000000000003C800000150F7714F3154E17978.jpg"
+style="width:6.9252in;height:2.4035in" /></p>
+<p>You will then see this screen when the installer is looking for the
+repository to deploy XCP-ng.</p>
+<p><img src="./Pictures/10000000000002F00000023C74883086548F644F.jpg"
+style="width:6.9252in;height:5.2673in" /></p>
+<p>This has been years since I have not done this steps, nowadays medias
+are quite reliable and we rarely have issues with devices. I would
+recommend it only if you do a deployment for production environment.
+</p>
+<p><img src="./Pictures/100000000000030A0000026157D24F1E00BB28D4.jpg"
+style="width:6.9252in;height:5.4201in" /></p>
+<p>This is the step where you specify the password for the root account,
+this password is the most important of the platform. Keep it in a safe
+place.</p>
+<p><img src="./Pictures/100000000000033E000001E0CE5ABBC2DA9D19ED.jpg"
+style="width:6.9252in;height:4.0043in" /></p>
+<p>Select the IP version you need, in home lab IPv4 is for good enough,
+and easier to handle for me.</p>
+<p>In the future, I’ll have a better look at IPv6 which bring some
+interesting security features but that’s for another day.</p>
+<p><img src="./Pictures/10000000000003AD000002E20C2B6B1E6B1A7BF8.jpg"
+style="width:6.9252in;height:5.4307in" /></p>
+<p>Here you will have to configure the Network of your XCP-ng. I highly
+recommend using static configuration or at least reserved address on
+your DHCP server. If your IP were to change you will need a DNS
+infrastructure in of your lab to make sure you don’t have to look for
+the new IP of your XCP-ng machine when it has changed.</p>
+<p>Using VLAN is a good idea, if you have the infrastructure for it,
+this split your networks by purpose to better control your network
+traffic, and add a layer of security as well since only member of this
+VLAN will see the content of the network traffic.</p>
+<p><img src="./Pictures/10000000000003600000027BDD037377B12F2B1C.jpg"
+style="width:6.9252in;height:5.089in" /></p>
+<p>In this step you have to configure your XCP-ng machine name as well
+as the DNS server.</p>
+<p>If you can I recommend having a DNS server in your home lab when you
+start to have several machines that you need to access through the
+network.</p>
+<p><img src="./Pictures/1000000000000300000002E3B90E6EABE8412416.jpg"
+style="width:6.9252in;height:6.6634in" /></p>
+<p>At this step select the timezone you are in, to have your XCP-ng
+machine at the correct time.</p>
+<p><img src="./Pictures/10000000000003290000022074F54A6416C8C79E.jpg"
+style="width:6.9252in;height:4.6563in" /></p>
+<p>If your XCP-ng machine has access to internet you can use the default
+NTP servers which will be public NTP servers. If it doesn’t you can use
+an internal NTP server in your home lab.</p>
+<p><img src="./Pictures/10000000000003AB0000022EE34D73ADD024769E.jpg"
+style="width:6.9252in;height:4.1146in" /></p>
+<p>And finally you are all good, and ready to install the XCP-ng.</p>
+<p><img src="./Pictures/10000000000003AB00000165592997CA424B967D.jpg"
+style="width:6.9252in;height:2.6327in" /></p>
+<p>This is the next screen that you will see where the install prepare
+all the elements for the installation.</p>
+<p><img src="./Pictures/10000000000003EC00000160343A103669BA6957.jpg"
+style="width:6.9252in;height:2.428in" /></p>
+<p>You will then see this screen which show you the progress of the
+installation of XCP-ng.</p>
+<p><img src="./Pictures/10000000000004EE00000211504F1CB52944AD4C.jpg"
+style="width:6.9252in;height:2.9028in" /></p>
+<p>And finally the progress of the post-installation of XCP-ng.</p>
+<p><img src="./Pictures/10000000000003D200000205F69702971DDEAA42.jpg"
+style="width:6.9252in;height:3.6602in" /></p>
+<p>And you are done ! You can remove the USB Key and click on the OK
+button to restart and get started with your first VMs.</p>
+<h2 id="xcp-ng-terminal">XCP-ng terminal</h2>
+<p>After booting you should see terminal like this one below.</p>
+<p><img src="./Pictures/1000000000000FA0000008CC8D8A61A1E2D6482E.jpg"
+style="width:6.9252in;height:3.8984in" /></p>
+<p>This UI gives you the possibility to do some basic admin task (
+Network, view VMs, resources, backup restore XCP-ng, etc) for this host
+only.</p>
+<p>Another option to administer this host only is to use XO Lite which
+is accessible through a web interface.</p>
+<p>You can access it directly on the default https port, by following
+this URL pattern: https://[XCP-NGHOSTNAME]OR[XCP-NGIP ADDRESS]. For
+example:</p>
+<ul>
+<li>If my XCP-ng machine has the DNS hostname <em>mycloud.local</em>, I
+will access XO lite at <a
+href="https://mycloud.local/">https://mycloud.local</a>. </li>
+<li>If my XCP-ng machine has the IP <em>192.168.0.1</em>, I will access
+XO-lite at <a href="https://192.168.0.1/">https://192.168.0.1</a>. </li>
+</ul>
+<h2 id="xo-lite">XO lite</h2>
+<p><img src="./Pictures/10000000000001E5000002930DF410D24CE9E092.png"
+style="width:3.589in;height:4.8764in" /></p>
+<p>This is the login page of XO lite, once logged in with the root
+account to which you have specified the password during the installation
+phase. </p>
+<p>You will land on this UI, it is dedicated to administer this machine
+only. </p>
+<p><img src="./Pictures/10000000000008F700000447F7672839BA4AD56E.png"
+style="width:6.9252in;height:3.3035in" /></p>
+<p>As the time of writing XO lite is still in active development and
+some basic features are still missing.</p>
+<p>So for now I recommend to go trough the next step which is deployment
+of the XOA ( Xen Orchestra )</p>
+<h2 id="section"></h2>
+<h2 id="deploy-xoa">Deploy XOA</h2>
+<p>In this step you will deploy XOA, which at this stage is the best
+tool to manage 1 or more XCP-ng hosts. I won’t go in to much details for
+this steps as I will have a dedicated article for it, and this one is
+getting already too long !</p>
+<p>Click on the “Deploy XOA” button on the top right corner.</p>
+<p><img src="./Pictures/10000000000008F700000447F7672839BA4AD56E.png"
+style="width:6.9252in;height:3.3035in" /></p>
+<p><img src="./Pictures/10000000000007D2000003EAB13CDBB78B3FA86C.png"
+style="width:6.9252in;height:3.4654in" /></p>
+<p>Fill in all the required information then click on the “Deploy”
+button at the bottom.</p>
+<p>Once the deployment is finish you will access to XOA ( Xen Orchestra
+) through the IP address provided by default XOA is accessible through
+HTTP. For example HTTP://192.168.0.2</p>
+<p>This is the login screen you should see when accessing the URL.</p>
+<p><img src="./Pictures/10000000000001D70000025D33511FA25A6E7C1C.png"
+style="width:4.9055in;height:6.3016in" /></p>
+<p>Congratulation you made it until the end of this article !</p>
+<p>This is the longest I have done so far hope everything when well and
+that you can enjoy setting up your first Virtual machines !</p>
+<p>See you on the next article, we will talk about Wire Guard VPN setup
+to access securely my lab remotely.</p>
+</div></body>
+</html>
