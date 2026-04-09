@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>XCP-ngCommunityEdition</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body><div class="article-wrapper">
+<h1 id="xcp-ng-community-edition">XCP-ng
+<em><em>Community</em></em><br />
+Edition</h1>
+<p>A community-built ISO of XCP-ng that removes the friction of initial
+setup by pointing XO Lite's deployment flow to a self-hosted XOA
+image.</p>
+<p>Status: Active development Platform: GitHub Actions Base: XCP-ng 8.x
+April 2026 </p>
+<p>01 — Background</p>
+<h2 id="why-this-exists">Why this exists</h2>
+<p>XCP-ng ships with XO Lite, a lightweight management SPA served
+directly from XAPI. When a fresh host is installed and opened in a
+browser, XO Lite offers a button to deploy XOA — Xen Orchestra
+Appliance, the full management interface. Out of the box, that button
+points to a Vates-hosted image.</p>
+<p>For home labbers who want to get into XCP-ng the build from source
+while being incredibley simplified now by Ronivay’s work [ <a
+href="https://github.com/ronivay/XenOrchestraInstallerUpdater">https://github.com/ronivay/XenOrchestraInstallerUpdater</a>]
+this is unnecessary friction. </p>
+<p><em>The goal is to get it’s XCP-ng with XOA up and running as simply
+as possible with the community version ( build from source ) of
+XOA.</em></p>
+<p>02 — Architecture</p>
+<h2 id="what-the-build-changes">What the build changes</h2>
+<p>The project is intentionally minimal: one fork and one ISO builder
+repository, with no scheduled jobs, no cross-repo dispatches, and no
+GitHub Pages infrastructure.</p>
+<p>Single Repo</p>
+<p>Fork of <strong><strong>vatesfr/xen-orchestra</strong></strong>.
+Contains a patch to <em><em>xoa-deploy.vue</em></em> that rewrites the
+XVA download URL from the Vates appliance to a community-hosted
+image.</p>
+<p>ISO builder with a single GitHub Actions workflow. Pulls the upstream
+XCP-ng ISO, patches the XO Lite RPM in place, rebuilds the ISO with
+correct hybrid boot flags, and uploads the artifact.</p>
+<h3 id="the-two-patch-targets">The two patch targets</h3>
+<p>XO Lite has a two-layer loading model. The outer index.html contains
+a try/catch block that load lite.xen-orchestra.com to fetch the latest
+build before falling back to the locally bundled xolite.html. The
+patched build removes that block entirely. The XVA download URL lives
+inside the compiled JS of xoa-deploy.vue and is rewritten via sed to a
+community URL at this stage it’s only on my local network :D</p>
+<p>03 — Build pipeline</p>
+<h2 id="how-the-iso-is-assembled">How the ISO is assembled</h2>
+<h3 id="rpm-built-from-source">RPM built from source</h3>
+<p>A first approach of patching compiled assets with rpmrebuild was
+discarded in favour of a full source build. The core problem with the
+binary-patch approach was Vite's content-hashed output filenames —
+XoaDeployView-Dn74Z1bd.js changes on every upstream rebuild, requiring
+manual re-discovery of the new filename with each XCP-ng ISO update.
+Anyway this was not a reliable option in the long run.</p>
+<p>The current pipeline builds the RPM from source: clone the repo,
+apply a single git-format patch to the TypeScript source, compile with
+yarn/Vite, assemble a tarball, and run rpmbuild with a minimally
+modified community spec. The patch lives at the correct abstraction
+level and is designed to survives upstream filename changes
+automatically.</p>
+<p>The patch file is the only artifact that encodes the community
+customization — everything else is standard plumbing that follows the
+upstream spec unchanged.</p>
+<h3 id="build-sequence">Build sequence</h3>
+<p>A</p>
+<p><strong><strong>Detect version from the ISO.</strong></strong> Query
+the XO Lite RPM already present in the extracted ISO to get the exact
+version string, rather than hardcoding it. </p>
+<p>XO_LITE_RPM=$(find iso-work/Packages/ -name "xo-lite*.rpm" | head -1)
+XO_VERSION=$(rpm -qp --queryformat '%{VERSION}' "$XO_LITE_RPM")</p>
+<p>B</p>
+<p><strong><strong>C</strong><strong>lone the</strong><strong>
+xen-orchestra</strong><strong> repo</strong></strong>. </p>
+<p>git clone https://github.com/vatesfr/xen-orchestra.git</p>
+<p>C</p>
+<p><strong><strong>Apply the community patch.</strong></strong> A
+standard git diff-format patch targeting
+@xen-orchestra/lite/src/views/deploy-xoa/DeployXoaView.vue. It replaces
+the hardcoded Vates XVA URL with a new URL, inserted before the existing
+XAPI import call. </p>
+<p>git apply patches/community-xoa-deploy.patch</p>
+<p>D</p>
+<p><strong><strong>Install dependencies and build.</strong></strong>
+Uses the repo's turbo pipeline. </p>
+<p>yarn build:xo-lite</p>
+<p>E</p>
+<p><strong><strong>Assemble the source tarball.</strong></strong> The
+spec's %autosetup expects a top-level directory named xo-lite-{VERSION}/
+containing the Vite dist/ output with the patched index.html, the
+LICENSE and CHANGELOG.md. </p>
+<p>TARBALL_DIR="xo-lite-${XO_VERSION}" tar -czf
+"xo-lite-${XO_VERSION}.tar.gz" "${TARBALL_DIR}/"</p>
+<p>F</p>
+<p><strong><strong>Build the RPM with rpmbuild.</strong></strong> The
+community spec is the upstream spec with two changes only: Source0
+points to the local tarball, and the Release field gets a community.1
+suffix. </p>
+<p>mkdir -p ~/rpmbuild/{SOURCES,SPECS,RPMS,SRPMS,BUILD} cp
+"xo-lite-${XO_VERSION}.tar.gz" ~/rpmbuild/SOURCES/ cp
+SPECS/xo-lite-community.spec ~/rpmbuild/SPECS/ rpmbuild -ba
+~/rpmbuild/SPECS/xo-lite-community.spec \ --define "_topdir
+$HOME/rpmbuild"</p>
+<p>G</p>
+<p><strong><strong>Swap the RPM into the ISO.</strong></strong> Remove
+the original, drop in the new one, and let createrepo_c --update rebuild
+the repo metadata. </p>
+<p>rm -f "$XO_LITE_RPM" cp ~/rpmbuild/RPMS/noarch/xo-lite-*.rpm
+iso-work/Packages/</p>
+<h3 id="iso-repack-with-hybrid-boot-support">ISO repack with hybrid boot
+support</h3>
+<p>Early test I used genisoimage, but couldn’t get it boot on a physical
+machine. The current pipeline uses xorriso -as mkisofs for the ISO,
+followed by a mandatory isohybrid --uefi post-processing step from
+syslinux-utils to stamp the full partition table. This is now working
+and I have both legacy Bios or UEFI boot mode.</p>
+<h3 id="answerfile-via-isolinux.cfg">Answerfile via isolinux.cfg</h3>
+<p>Replacing the signed XO Lite RPM invalidates repomd.xml.asc, which
+would cause the installer to abort with a GPG verification failure. The
+answerfile is served externally over HTTP and the installer is pointed
+to it via a kernel parameter injected directly into isolinux.cfg.</p>
+<p>The build step patches the boot configuration with a single sed
+in-place substitution:</p>
+<p>sed -i \ 's|---
+/install.img|answerfile=http://192.168.0.1:3000/answerfile.xml install
+--- /install.img|' \ iso-work/boot/isolinux/isolinux.cfg</p>
+<p>At install time the host-installer fetches the answerfile from that
+URL. The answerfile itself carries the GPG bypass directives and any
+other unattended installation parameters.</p>
+<p>This is a workaround for now as the ISO rebuild is breaking the GPG
+check, an issue that needs to be investigated to fix in the future,
+sooner than later.</p>
+<p>04 — Lessons learned</p>
+<h2 id="lots-of-learning">Lot’s of learning !</h2>
+<p>GPG attrs</p>
+<h4 id="two-independent-attributes-not-one">Two independent attributes,
+not one</h4>
+<p>gpgcheck and repo_gpgcheck are separate. Couldn’t find documentation
+about it but the XCP-ng forum was helpful as well as the installer
+source at answerfile.py. </p>
+<p>Network</p>
+<h4 id="vif-network-selection-bug">VIF network selection bug</h4>
+<p>filteredNetworks in xoa-deploy.vue seems to sorts alphabetically,
+time to time auto-selecting "Host internal management network" over the
+correct VIF linked to the Eth. A fix would requires filtering networks
+with VIF associations, or forcing explicit user selection. </p>
+<p>PS: This is currently an issue because my XOA image is not using the
+configuration </p>
+<p>provided by XO-lite.</p>
+<p>05 — Remaining work</p>
+<h2 id="what-comes-next">What comes next</h2>
+<p>- Support GPG check in the ISO build to remove the Answerfile
+workaround</p>
+<p>- Find a way to set user/pass, NIC, XOA, ssh pass to the image
+provided by Ronivay.</p>
+<p><em>- Build a middleware that support HTTPS and gunzip format and
+re-stream seemlessly to xapi VM.import which doesn’t support HTTPS and
+gunzip format.</em></p>
+</div></body>
+</html>

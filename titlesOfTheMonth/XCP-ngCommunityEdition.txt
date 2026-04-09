@@ -1,0 +1,18 @@
+<think>
+Okay, so I need to generate a short and catchy title for this article based on the provided context. Let me look through the content snippets to understand what's being discussed.
+
+The articles are titled with phrases like "01 — Background," "02 — Architecture," and "03 — Build pipeline." Looking at each of these, they seem to outline different phases or sections of the project related to XCP-ng and its build process. 
+
+For example:
+- The first article talks about why XCP-ng was created, explaining how XO Lite is used for deployment.
+- The second one discusses the architecture changes in the codebase, including how it's built from source.
+- The third one details the build pipeline steps to assemble a self-hosted XOA image.
+
+Since all these articles are part of a community-built project, the title should reflect that. It mentions building an ISO withoutGitHub Pages and simplifying setup by using community support. 
+
+I think the key elements here are "Community-built," "XO Lite," "XCP-ng," and "Self-hosted XOA." Combining these into a concise title would make it catchy and accurate.
+
+Putting it together, the first part might be "Building a Community-Built ISO..." and then adding the specifics at the end. So, "Building a Self-Hosted XOA ISO via a Community-built XO Lite Installation" seems to cover all the important aspects without being too lengthy.
+</think>
+
+Building a Self-Hosted XOA Iso via a Community-built XO Lite Installation

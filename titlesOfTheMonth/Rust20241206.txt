@@ -1,1 +1,11 @@
-"Cleanly Uniquely Unique Coding Challenge - Rust's Struggle Against Twitch Live"
+<think>
+Okay, so I need to generate a short and catchy title for this article based solely on the provided context. Let me take a look at the content first.
+
+Looking through the document metadata, I see that it's about comparing lines of code using print statements. The initial part is about open() and stdin handling. Then there's a loop comparing each line with the previous one to avoid duplicates. It's mentioned in Rust code, so the focus seems on code formatting and how to compare lines efficiently.
+
+The title needs to be concise and reflect these key points: comparing lines of code, print statements for output, handling errors if any. I should make sure it's catchy and includes "comparing" since that's a main topic here.
+
+So putting it together, something like "Efficient Code Comparison with Print Statements" or maybe "Code Comparison Using Print Statements." That seems to capture both the method and what's being done efficiently.
+</think>
+
+Efficient Code Comparison Using Print Statements

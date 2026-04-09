@@ -1,1 +1,15 @@
-AI Title: "Automated Title Creation Workflow on Ollama Backend Workflow - A New Step for Content Analysis"
+<think>
+Okay, I need to generate a short and catchy title for the given article based on the provided content. Let me read through the document carefully.
+
+The article is about an LLM workflow that automates creating technical titles. It mentions various steps like installing VMs, getting Ollama, downloading models, installing LangChain, building a script, using SSH key authentication, and processing odt files with RAG. There's also some context on how the database vector works.
+
+The main focus seems to be on setting up the LLM environment for title generation. The goal is to create an article that highlights the workflow without getting too technical.
+
+I should keep it concise but descriptive enough to capture the essence of the topic. Maybe mention the use of Ollama, LangChain, and vector databases, as those are key components mentioned in the content.
+
+Also, since it's about creating titles based on documents, I can include that aspect briefly.
+
+Putting it together: something like "Automated Title Generation using LLM Workflow" seems to cover the setup and purpose. It’s short and includes all important elements without being too verbose.
+</think>
+
+Automated Title Generation using LLM Workflow

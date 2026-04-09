@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>MigrateVMtoXCP</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body><div class="article-wrapper">
+<p><strong>Migrate / Restore VMs with XCP-ng</strong></p>
+<p>I recently had hardware issues on one of my XCP‑ng hosts. Several VMs
+were lost and I had to rebuild the host from scratch. To rescue the
+remaining VMs I exported them to a new host I built recently.</p>
+<p>Because the host is reachable only remotely and is experiencing
+hardware failures, migration via the Xen Orchestra (XOA) integrated tool
+is not straightforward.</p>
+<p><strong><strong>Network difficulty</strong></strong> – I managed to
+connect my local XOA instance to the remote host, but I cannot initiate
+a migration because the remote host lacks a network route to my local
+XCP‑ng host.</p>
+<p><strong><strong>Hardware difficulties</strong></strong> – The host
+suffers from disk or back‑plane/controller problems, which complicates
+VM export; the CLI tools fail for several VMs.</p>
+<p>Below are three methods I used to back up all VMs.</p>
+<h3 id="xe-vmexport-cli">1. xe vm‑export (CLI)</h3>
+<p>After installing XOA (Xen Orchestra), the simplest way to export a VM
+for migration is to use the <em>xe vm-export</em> command.</p>
+<ol type="1">
+<li><strong><strong>Locate the VM</strong></strong> – SSH into the
+XCP‑ng host and list all VMs, piping the output through <em>grep</em> to
+filter by the VM’s name: </li>
+</ol>
+<p><em>xe vm-list | grep -C2 myvirtualmachine</em></p>
+<p>Example output (showing the UUID you need):</p>
+<p><em>uuid (RO) : b63b8285-94b5-3d26-9fe2-4be3ab046cd9</em></p>
+<p><em>name-label (RW) : myvirtualmachine-1</em></p>
+<p><em>power-state (RO) : halted</em></p>
+<ol start="2" type="1">
+<li><p><strong><strong>Export the VM</strong></strong> – Using that
+UUID, export the VM to an XVA file:</p>
+<p><em>xe vm-export vm=b63b8285-94b5-3d26-9fe2-4be3ab046cd9 \</em></p>
+<p><em>
+filename=/run/sr-mount/a8f6df31-434f-d5e9-4163-99975b1df8ad/myvirtualmachine-1.xva</em></p>
+<p><em><em>Note:</em></em> An XVA is essentially a tarball containing
+the VHD (virtual hard disk) and an XML descriptor of the VM.</p></li>
+<li><p><strong><strong>Transfer the XVA</strong></strong> – After the
+SCP transfer finishes (it can take many hours), import the XVA on the
+destination host:</p>
+<p><em>xe vm-import
+filename=/run/sr-mount/SMB/Data/Backup/VirtualMachines/XCP-NG-NG/myvirtualmachine-1.xva
+\</em></p>
+<p><em> sr-uuid=54b7eaaa-b873-410a-cef6-6be9999edfdd</em></p>
+<p>Although XOA does not provide a UI import function for XVA, you can
+monitor the import job in XOA after invoking <em>vm-import</em> from the
+CLI.</p></li>
+</ol>
+<h3 id="systemrescuecd-manual-disk-imaging">2. SystemRescueCD – Manual
+Disk Imaging</h3>
+<p>When network isolation makes XOA migration impossible and <em>xe
+vm-export</em> fails with I/O errors, I booted a SystemRescueCD live
+environment and created an image of the virtual disk for later
+import.</p>
+<ol type="1">
+<li><p><strong><strong>Boot the failing VM with
+SystemRescueCD</strong></strong> and mount a network share where the
+image will be saved. In my case I mounted the XCP‑ng host via
+<em>sshfs</em>:</p>
+<p><em>sshfs
+backup@172.16.16.16:/run/sr-mount/a7f6df31-437e-dr88-4132-8af9999df8ad
+/mnt/sgxcp</em></p></li>
+<li><p><strong><strong>Convert the raw block device to a
+VHD</strong></strong> using <em>qemu-img</em>:</p>
+<p><em>qemu-img convert -p -f raw -O vpc /dev/xvdb
+/mnt/sgxcp/mydifficultvm.vhd</em></p>
+<p>Options:</p>
+<ul>
+<li><em>-p</em> – show progress </li>
+<li><em>-f raw</em> – input format is raw block device </li>
+<li><em>-O vpc</em> – output format is Microsoft VHD </li>
+</ul></li>
+<li><p><strong><strong>Create a VDI on the destination
+host</strong></strong> (the VDI acts as a wrapper that XCP‑ng can attach
+to a VM). First retrieve the UUID of the storage repository (SR) where
+the VDI will reside:</p>
+<p><em>xe sr-list</em></p>
+<p>Sample output:</p>
+<p><em>uuid (RO) : 54b98dd-b785-410a-cef6-6b999dfaa</em></p>
+<p><em>name-label (RW) : SR1</em></p>
+<p><em>name-description (RW): local storage on NVME1</em></p>
+<p><em>host (RO) : xcp</em></p>
+<p><em>type (RO) : ext</em></p>
+<p><em>content-type (RO) : user</em></p>
+<p>Then create the VDI (choose a size equal to or larger than the source
+VHD):</p>
+<p><em>xe vdi-create name-label=myvirtualmachine-1-xvda \</em></p>
+<p><em> sr-uuid=54b98dd-b785-410a-cef6-6b999dfaa \</em></p>
+<p><em> virtual-size=255GiB</em></p>
+<p>The command returns a VDI UUID; keep note of it. If you missed it,
+retrieve it with:</p>
+<p><em>xe vdi-list | grep -C1 myvirtualmachine</em></p></li>
+<li><p><strong><strong>Import the VHD into the newly created
+VDI</strong></strong>:</p>
+<p><em>xe vdi-import filename=mydifficultvm.vhd \</em></p>
+<p><em> format=vhd \</em></p>
+<p><em> uuid=e0ae1995-4c6b-4a12-99a0-b70d3c9995ab \</em></p>
+<p><em> progress=true</em></p></li>
+<li><p><strong><strong>Create a VM that boots from the
+VDI</strong></strong></p>
+<ul>
+<li>In XOA, run the standard “Create VM” wizard (details omitted). </li>
+<li>XOA requires a placeholder disk during VM creation; after the VM
+exists, delete the auto‑generated disk and attach the VDI you just
+created. </li>
+</ul></li>
+</ol>
+<p><strong><strong>Congratulations!</strong></strong> You can now start
+the VM.</p>
+<h3 id="simple-vhd-copy-manual">3. Simple VHD Copy (Manual)</h3>
+<p>Another option I tried for a single VM when the previous methods
+failed was to copy the raw VHD file directly:</p>
+<ol type="1">
+<li>Locate the VHD files on the source host (they live under the SR
+mount point; you can find the exact path with <em>df -h</em> after
+SSH’ing into the host). </li>
+<li>Copy the VHD to the new host via SCP or rsync. </li>
+<li>On the destination host, create a new VDI of the appropriate size
+(<em>xe vdi-create …</em>) and import the copied VHD into it (<em>xe
+vdi-import …</em>). </li>
+<li>Attach the VDI to a freshly created VM as described above. </li>
+</ol>
+<p>This method worked intermittently; some copies still produced read
+errors.</p>
+<h3 id="windows-backup-guestside">4. Windows Backup (Guest‑Side)</h3>
+<p>For one VM, none of the above worked. I attempted a guest‑side backup
+using Windows’ built‑in Backup utility, planning to:</p>
+<ol type="1">
+<li>Back up the Windows VM internally. </li>
+<li>Recreate a new VM on the destination XCP‑ng host. </li>
+<li>Restore the backup after booting from a Windows ISO. </li>
+</ol>
+<p>Unfortunately this method also failed.</p>
+<h3 id="manual-data-dump-rebuild">5. Manual Data Dump &amp; Rebuild</h3>
+<p>The final approach involved manually dumping databases and files,
+then rebuilding the VM on the new host. I’m currently at this stage;
+it’s unrelated to XCP‑ng specifics, so I won’t elaborate further.</p>
+<p>At this point only two VMs remain to be rebuilt.</p>
+<h2 id="closing-remarks">Closing Remarks</h2>
+<p>Repeating these procedures has allowed me to recover the majority of
+my workloads despite severe hardware failure and network isolation. The
+combination of:</p>
+<ul>
+<li><em>xe vm-export</em>, </li>
+<li>SystemRescueCD imaging, and </li>
+<li>manual reconstruction </li>
+</ul>
+<p>provides a flexible toolbox for any XCP‑ng disaster‑recovery
+scenario.</p>
+<p>Doing and re‑doing is still working…</p>
+</div></body>
+</html>
