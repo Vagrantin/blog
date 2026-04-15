@@ -1,17 +1,1 @@
-<think>
-Okay, I need to figure out how to generate a catchy title for the given article. Let me look at the content provided.
-
-The article is about using Rust's spawn() method with a child process via SSH, which helps debug. It mentions Claude.ai, so the key tools are Rust and generative AI. The user is on Windows terminal and trying to create an app that uses SSH. They mention integrating different programming languages like Ratatui, Rust, and perhaps WezTerm for cross-platform terminals.
-
-The main points are using spawn() in Rust with a child process to manage SSH sessions sequentially, which aids in debugging. It also talks about building the app on Windows, switching from CLI to terminal, and dealing with issues on WSL2 and Linux.
-
-So the article is about an approach to create a web application that uses SSH for remote access efficiently and debugged using Rust's spawn method with child processes. The goal is to split command execution into multiple SSH sessions to manage SSH commands better during app development, especially when running on Windows or different operating systems.
-
-Putting this together, I need something short but catchy that includes the key elements: SSH integration, Rust, child process, Windows terminal, and web app.
-
-Maybe start with "Exploring SSH-Driven Web Apps..." which mentions SSH integration. Then include Rust's features like spawn() for child processes. Add Windows-specific details about using terminal. Maybe mention Claude.ai for debugging tools. Also, the main idea is to debug issues created by generative AI tools during app development on different platforms.
-
-So combining these elements: "Exploring SSH-Driven Web Apps with Rust via Child Processes Using Windows Terminal and Generative AI for Debugging." That covers all key points in a concise way.
-</think>
-
-"Exploring SSH-Driven Web Apps with Rust via Child Processes Using Windows Terminal and Generative AI for Debugging."
+Cracking GenAI Using WezTerm And TMUX: A Simple Approach To Trigger SSH Connections On Windows Terminal

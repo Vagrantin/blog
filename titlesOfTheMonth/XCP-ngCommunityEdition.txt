@@ -1,11 +1,1 @@
-<think>
-Okay, I need to figure out how to generate a catchy title for this article based on the provided context. Let me read through the content first to understand what's going on.
-
-The article is about XCP-ng, a community-built Linux distribution. It talks about their architecture, build pipeline, and some issues they've faced like a VIB network selection bug. But the main focus seems to be how XO Lite was modified to use a self-hosted image for XOA.
-
-I notice that the title should be concise and reflect the key aspects of the article. The platform is community-built, so mentioning "Community-Driven" makes sense. They're focusing on XO Lite deployment, so including "XO Lite Deployment" is important. Highlighting their approach to removing VIBs would show they've solved a common problem.
-
-Putting this together, I think something like "A Community-Driven Approach to XCP-ng's XO Lite Deployment Using Self-Hosted XOA Image" captures the essence of their solution without being too wordy. It covers their minimal architecture, self-hosting of the XOA image, and solving VIB issues effectively.
-</think>
-
-"A Community-Driven Approach to XCP-ng's XO Lite Deployment Using Self-Hosted XOA Image"
+How to Build an Open Source Router Using Arduino and MQTT Communication

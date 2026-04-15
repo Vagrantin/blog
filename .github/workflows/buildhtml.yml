@@ -36,7 +36,7 @@ jobs:
       run: chmod +x buildIndexHtml.sh
 
     - name: Run build script
-      run: ./buildIndexHtml.sh
+      run: ./.github/workflows/buildIndexHtml.sh
 
     - name: Commit and Push changes to publish branch
       uses: stefanzweifel/git-auto-commit-action@v5

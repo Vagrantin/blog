@@ -25,7 +25,7 @@ import ollama
 SOURCE_FOLDER = "./source"
 DONE_FOLDER = "./done"
 OUTPUT_FOLDER = "./output"
-MODEL = "deepseek-r1:1.5b"
+MODEL = "tinyllama"
 EMBEDDING_MODEL = "nomic-embed-text"
 INACTIVITY_TIMEOUT = 10
 SHUTDOWN_CHECK_INTERVAL = 1
