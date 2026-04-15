@@ -33,7 +33,7 @@ jobs:
         rm "$PANDOC_DEB_FILE"
 
     - name: Make build script executable
-      run: chmod +x buildIndexHtml.sh
+      run: chmod +x ./.github/workflows/buildIndexHtml.sh
 
     - name: Run build script
       run: ./.github/workflows/buildIndexHtml.sh
