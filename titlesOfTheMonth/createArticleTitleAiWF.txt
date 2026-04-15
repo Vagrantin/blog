@@ -1,21 +1,17 @@
 <think>
-Okay, so I need to come up with a short and catchy title for this article based on the context provided. Let me read through the document content again to get an idea of what the article is about.
+Okay, so I need to generate a short and catchy title for this blog post based on the provided context. Let me read through the details carefully.
 
-The first paragraph talks about creating new article titles every month and comparing it to how others do it online. It mentions using machine learning models like qwen2 0.5B, which are known for being fast on CPU but not GPU. The main point seems to be about automatic title generation, especially in the context of a blog.
+The first document is about auto-generated article titles using LLM. It mentions that every month new titles are created. They tested several models, including qwen2 0.5B, which runs quickly on CPU but doesn't use GPU for inference. Gemma3n is much slower to run. The author finds it funny since they update their workflow weekly and wants to automate this process in the future.
 
-The second paragraph talks more specifically about a VM setup where all articles are written in Libre Office. It describes how each article is pushed to a watch-folder on the VM using a script. Then, it runs Ollama, which automates the title generation from ODT files (which I assume are .odt files). For each ODT file, a corresponding text file with the title is created and saved.
+The second document talks about a separate VM running the title generation workflow. All articles are written in Libre Office, and there's a script on the VM that runs Ollama to generate titles. Each ODT file is converted into a text file with the article title and then imported back to the local machine. The author updates their bash script each time they commit to GitHub to rebuild the HTML page.
 
-The third paragraph introduces the workflow used for publishing to GitHub, mentioning that titles are generated every month. It also talks about comparing filenames in ODT and TXT files when they match, reading content using "head" command, and appending the publication date.
+The third document discusses improving the workflow, mentioning the creation of auto_titles – Part 1, where they set up the blog post titles using LLM. They plan to create parts 2 and 3 next month.
 
-Putting this all together, the article discusses a method of automating blog post titles by leveraging Ollama on a VM. The main focus is on how frequently titles are generated each month and how automatic title creation works, combining manual content checks with AI-generated titles.
+Putting this all together, the article is about automating blog post titles using AI/LLM. It's part of a series, so it's likely aimed at data scientists or developers looking to streamline their workflow by leveraging AI tools. The focus on Libre Office writing suggests a specific audience, perhaps tech professionals who write blogs for a company.
 
-So, for the title, I need something that highlights the automation aspect, mentions Ollama, the time it's used, and perhaps the frequency of updates. Since it's a blog post, terms like "automatic title generation," "ollama integration," or "content creation" might be relevant.
+The title should be short and catchy, reflecting the key aspects: auto-generated titles, LLM, workflow improvement, part of a series. It needs to convey that this is an ongoing effort within their team to streamline their content creation process using AI tools.
 
-I want to make it catchy but concise. Maybe start with something that includes the main action, like "automatic title generation." Then mention Ollama and the workflow context. Since it's about generating titles every month, perhaps include a number or frequency in the title? But maybe not necessary if it's too wordy.
-
-I think I can go with "Automatic Title Generation Using Ollama: A Month-Resigned Trend" because it includes the main topic (automatic title generation), mentions Ollama as the integration tool, and notes that this trend has been monthed. It sounds catchy and hits all key points without being too lengthy.
-
-Alternatively, "Title-a-Blog: Automating Your Blog's Content" is another option, but I think the first one covers more ground with specific tools used (ollama) and mentions the time-keeping aspect of generating titles.
+I'm thinking something like "Auto-Titling with AI/LLM! Part 1." That includes the main idea and suggests they'll cover more parts in the future. It's concise, engaging, and aligns with the context provided.
 </think>
 
-Automatic Title Generation Using Ollama: A Month-Resigned Trend
+Auto-Titling with AI/LLM! Part 1

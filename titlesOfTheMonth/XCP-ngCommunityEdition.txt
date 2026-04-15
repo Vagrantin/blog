@@ -1,18 +1,11 @@
 <think>
-Okay, so I need to generate a short and catchy title for this article based on the provided context. Let me look through the content snippets to understand what's being discussed.
+Okay, I need to figure out how to generate a catchy title for this article based on the provided context. Let me read through the content first to understand what's going on.
 
-The articles are titled with phrases like "01 — Background," "02 — Architecture," and "03 — Build pipeline." Looking at each of these, they seem to outline different phases or sections of the project related to XCP-ng and its build process. 
+The article is about XCP-ng, a community-built Linux distribution. It talks about their architecture, build pipeline, and some issues they've faced like a VIB network selection bug. But the main focus seems to be how XO Lite was modified to use a self-hosted image for XOA.
 
-For example:
-- The first article talks about why XCP-ng was created, explaining how XO Lite is used for deployment.
-- The second one discusses the architecture changes in the codebase, including how it's built from source.
-- The third one details the build pipeline steps to assemble a self-hosted XOA image.
+I notice that the title should be concise and reflect the key aspects of the article. The platform is community-built, so mentioning "Community-Driven" makes sense. They're focusing on XO Lite deployment, so including "XO Lite Deployment" is important. Highlighting their approach to removing VIBs would show they've solved a common problem.
 
-Since all these articles are part of a community-built project, the title should reflect that. It mentions building an ISO withoutGitHub Pages and simplifying setup by using community support. 
-
-I think the key elements here are "Community-built," "XO Lite," "XCP-ng," and "Self-hosted XOA." Combining these into a concise title would make it catchy and accurate.
-
-Putting it together, the first part might be "Building a Community-Built ISO..." and then adding the specifics at the end. So, "Building a Self-Hosted XOA ISO via a Community-built XO Lite Installation" seems to cover all the important aspects without being too lengthy.
+Putting this together, I think something like "A Community-Driven Approach to XCP-ng's XO Lite Deployment Using Self-Hosted XOA Image" captures the essence of their solution without being too wordy. It covers their minimal architecture, self-hosting of the XOA image, and solving VIB issues effectively.
 </think>
 
-Building a Self-Hosted XOA Iso via a Community-built XO Lite Installation
+"A Community-Driven Approach to XCP-ng's XO Lite Deployment Using Self-Hosted XOA Image"

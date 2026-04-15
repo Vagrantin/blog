@@ -1,15 +1,21 @@
 <think>
-Okay, I need to generate a short and catchy title for the given article based on the provided content. Let me read through the document carefully.
+Okay, I need to generate a short and catchy title for the given article based on the content provided. Let me read through each document snippet carefully.
 
-The article is about an LLM workflow that automates creating technical titles. It mentions various steps like installing VMs, getting Ollama, downloading models, installing LangChain, building a script, using SSH key authentication, and processing odt files with RAG. There's also some context on how the database vector works.
+First document: It talks about installing Ollama on Linux, mentioning the installation script from ollama.com, some system requirements, and dependencies like Python and pip. There's also mention of setting up an SSH key for authentication.
 
-The main focus seems to be on setting up the LLM environment for title generation. The goal is to create an article that highlights the workflow without getting too technical.
+Second document: This is about configuring the LLM workflow using LangChain. It mentions the need to set up an XCP-ng host, deploying VMs on Linux, installing Ollama, and then integrating it with LangChain. The installation script from ollama.com is referenced again.
 
-I should keep it concise but descriptive enough to capture the essence of the topic. Maybe mention the use of Ollama, LangChain, and vector databases, as those are key components mentioned in the content.
+Third document: Discusses setting up a BuildTitle.sh script that copies output files for title generation. It also talks about LLM tasks like generating a title based on context.
 
-Also, since it's about creating titles based on documents, I can include that aspect briefly.
+Now, looking at the question prompt, I need to create a title using the provided content. The main focus seems to be on installation and integration with Ollama and LangChain. 
 
-Putting it together: something like "Automated Title Generation using LLM Workflow" seems to cover the setup and purpose. It’s short and includes all important elements without being too verbose.
+In document 2, it mentions installing Ollama and setting up an SSH key for remote authentication. Document 3 talks about configuring the BuildTitle.sh script, which copies outputs for titles. Document 1 discusses VM setup and LLM workflow steps.
+
+I want a title that reflects these elements: installation, LLM integration with Ollama and LangChain, context processing by the LLM using RAG. 
+
+Putting it together, "Install Ollama & Configure LLM Workflow" seems to cover installation and integration without mentioning SSH since that's more about the setup. It also hints at context processing through the LLM.
+
+Yes, that title captures the main points: Ollama on Linux, configuration with LangChain, context-based title generation.
 </think>
 
-Automated Title Generation using LLM Workflow
+Install Ollama & Configure LLM Workflow
