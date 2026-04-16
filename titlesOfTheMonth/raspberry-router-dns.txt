@@ -1,1 +1,1 @@
-Generate a Short and Catchy Title for "Using a Raspberry Pi as a Wired Network Router and DNS Server using Required Package"
+"Raspberry Pi Router & DNS Server Setup"

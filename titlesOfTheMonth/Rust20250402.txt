@@ -1,1 +1,1 @@
-"Rust's Viable Coding Evangelism - A Rust Notebook on Productivity, Vibe Coding, and Product Quality"
+"Vibe Coding in Rust: Reality Check & Best Practices"

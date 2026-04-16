@@ -1,1 +1,1 @@
-"Title: The unexpected character '^M' on Windows that affects output of both GNU coreutils head and rust version of head."
+"The Struggle with Strings and Newlines in Rust"

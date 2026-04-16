@@ -25,7 +25,7 @@ import ollama
 SOURCE_FOLDER = "./source"
 DONE_FOLDER = "./done"
 OUTPUT_FOLDER = "./output"
-MODEL = "tinyllama"
+MODEL = "mistral-nemo"
 EMBEDDING_MODEL = "nomic-embed-text"
 INACTIVITY_TIMEOUT = 10
 SHUTDOWN_CHECK_INTERVAL = 1

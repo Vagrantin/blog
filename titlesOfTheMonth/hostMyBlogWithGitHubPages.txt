@@ -1,1 +1,1 @@
-"Easy to Maintain: My Blog, Managing Articles Through Linked Is Quite Cumbersome, But With My Own Blog, I Can Build My Own Static Web Page for Different Articles!"
+"Automating Blog Creation with GitHub Pages & Rust"

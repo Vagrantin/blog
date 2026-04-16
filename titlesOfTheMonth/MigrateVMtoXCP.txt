@@ -1,1 +1,1 @@
-Title: "Migrate VMtoXCPngHost - A Case Study"
+Migrating VMs to XCP-NG: Best Practices

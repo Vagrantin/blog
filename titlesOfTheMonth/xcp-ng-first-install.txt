@@ -1,1 +1,1 @@
-Title: The Importance of Thick Provisioning in Virtual Machine Setup
+"XCP-ng First Install Guide"

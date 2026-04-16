@@ -1,1 +1,1 @@
-"On My Side: Install Ollama, Ps! Use SSH to Automate Workflow on Your Vagrant Machine"
+"Streamline Your Workflow with Ollama & LangChain"

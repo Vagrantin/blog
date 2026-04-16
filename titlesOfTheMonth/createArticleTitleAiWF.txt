@@ -1,1 +1,1 @@
-Create an AI assistant that can automatically create blog post titles based on the given text "My auto titles – Part 1" using local AI, LLM, and Qwen2 0.5B Model. The title generator should be able to read the content of each odt file and generate a unique title based on the article's title. The output should only contain the title in one line.
+"Monthly AI-Generated Blog Titles!"

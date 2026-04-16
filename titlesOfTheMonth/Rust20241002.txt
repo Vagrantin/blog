@@ -1,1 +1,1 @@
-Generate a short and catchy title for the given article using Ruby's String module
+"Battery Monitor with Rust & dbus Notifications"

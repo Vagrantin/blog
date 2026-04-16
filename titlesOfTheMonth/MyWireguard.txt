@@ -1,1 +1,1 @@
-"Use Wireguard to Access Remote Labs from Outside Home Network with Remote Access Setup on Router"
+Wireguard VPN Setup with Auto DNS Update

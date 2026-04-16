@@ -1,1 +1,1 @@
-Cracking GenAI Using WezTerm And TMUX: A Simple Approach To Trigger SSH Connections On Windows Terminal
+"Harnessing Rust's Power: SSH Sessions & Generative AI"
