@@ -1,1 +1,1 @@
-"Mastering Strings and UTF8 in Rust"
+Rust's Journey into Unicode Characters

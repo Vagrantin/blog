@@ -1,1 +1,1 @@
-"Streamline Your Workflow with Ollama & LangChain"
+"Auto Titles with Ollama & LangChain Backend Workflow"

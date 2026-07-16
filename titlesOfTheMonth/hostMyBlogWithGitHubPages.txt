@@ -1,1 +1,1 @@
-"Automating Blog Creation with GitHub Pages & Rust"
+"Blog Automation with GitHub Pages & Rust"

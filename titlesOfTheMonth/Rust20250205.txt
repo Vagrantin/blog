@@ -1,1 +1,1 @@
-"ASCII Art New Year 2025 with Ratatui.rs"
+"RatGUI: ASCII Art Meets Rust"

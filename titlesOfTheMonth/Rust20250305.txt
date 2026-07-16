@@ -1,1 +1,1 @@
-"Harnessing Rust's Power: SSH Sessions & Generative AI"
+"Mastering SSH Sessions with Rust: A Journey with Generative AI"

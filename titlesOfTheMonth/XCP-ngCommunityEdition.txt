@@ -1,1 +1,1 @@
-"XCP-ng Community Edition: A Minimal, Reliable ISO Builder"
+"XCP-ng Community Edition: Streamlined ISO Assembly Pipeline"

@@ -1,1 +1,1 @@
-Wireguard VPN Setup with Auto DNS Update
+"Setup Wireguard VPN on Raspberry Pi with DNS Update

@@ -1,1 +1,1 @@
-"Rust + AI: A Match Made in Code?"
+"AI Assistance in Learning Rust"
