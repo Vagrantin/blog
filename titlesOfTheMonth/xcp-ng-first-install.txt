@@ -1,1 +1,1 @@
-Installing XCP-ng: A Step-by-Step Guide
+"XCP-ng First Install Guide"

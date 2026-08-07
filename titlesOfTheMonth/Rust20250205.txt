@@ -1,1 +1,1 @@
-"RatGUI: ASCII Art Meets Rust"
+Rusting Up Your Terminal UI with Ratatui

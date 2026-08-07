@@ -1,1 +1,1 @@
-"File Format Fiasco: Rust vs GNU Coreutils Head"
+"Rust Head Block: Understanding Character Interpretation Challenges"

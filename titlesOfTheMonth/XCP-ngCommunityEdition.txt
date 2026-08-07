@@ -1,1 +1,1 @@
-"XCP-ng Community Edition: Streamlined ISO Assembly Pipeline"
+"XCP-ngCommunityEdition Pipeline Explained"

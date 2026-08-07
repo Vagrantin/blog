@@ -1,1 +1,1 @@
-"Why Rust is My New Love"
+"Embracing Rust: Power, Safety, and Endless Possibilities with Generative AI"

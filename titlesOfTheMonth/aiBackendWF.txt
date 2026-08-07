@@ -1,1 +1,1 @@
-"Auto Titles with Ollama & LangChain Backend Workflow"
+"The Ollama Backend Workflow"

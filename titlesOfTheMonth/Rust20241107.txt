@@ -1,1 +1,1 @@
-"AI Assistance in Learning Rust"
+"AI in Rust: Hype or Control?"

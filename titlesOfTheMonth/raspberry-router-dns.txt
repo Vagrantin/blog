@@ -1,1 +1,1 @@
-"RPi as Router & DNS Server
+"Raspberry Pi as Wired Router & DNS Server

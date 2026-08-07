@@ -1,1 +1,1 @@
-"Mastering SSH Sessions with Rust: A Journey with Generative AI"
+"Mastering SSH Sessions with Rust & Claude.ai"

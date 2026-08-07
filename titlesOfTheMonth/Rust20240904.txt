@@ -1,1 +1,1 @@
-"Refactoring Rust CLI Tool: A TDD Adventure"
+"Cutting-Edge Head: My Journey with GNU Head in Rust"

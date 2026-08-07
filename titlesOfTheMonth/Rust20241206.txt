@@ -1,1 +1,1 @@
-"Mastering Rust: Uniq Challenge & Lessons Learned"
+"Mastering 'uniq' in Rust: A Journey Through Challenges and Triumphs"

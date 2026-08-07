@@ -1,1 +1,1 @@
-"XCP-ng HL: From Minimal to Full Build Backend"
+"XCP-ng HL: The Evolution of My Home Lab Project"

@@ -1,1 +1,1 @@
-"Setup Wireguard VPN on Raspberry Pi with DNS Update
+"Setup Remote Access with Wireguard on Raspberry Pi"

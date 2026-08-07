@@ -1,1 +1,1 @@
-"Battery Low Level Notifier with Rust & Systemd"
+"Battery Low Level Notifier"

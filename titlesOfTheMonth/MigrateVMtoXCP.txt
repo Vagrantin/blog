@@ -1,1 +1,1 @@
-"Migrating VMs to XCP-ng: Methods & Troubleshooting"
+"Xen Orchestra Migration Masterclass"
