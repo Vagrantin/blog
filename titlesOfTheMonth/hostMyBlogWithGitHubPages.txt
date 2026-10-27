@@ -1,1 +1,1 @@
-"Automating Blog Creation with GitHub Pages & Pandoc"
+"My Blog: Automated, Simple & Easy to Maintain"

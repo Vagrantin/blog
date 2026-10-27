@@ -1,1 +1,1 @@
-"AI in Rust: Hype or Control?"
+"AI in Rust Development"

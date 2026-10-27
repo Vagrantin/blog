@@ -1,1 +1,1 @@
-Rusting Up Your Terminal UI with Ratatui
+"Mastering Ratatui's Canvas: Draw ASCII Art on Terminal UI"

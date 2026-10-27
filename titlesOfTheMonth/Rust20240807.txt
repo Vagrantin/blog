@@ -1,1 +1,1 @@
-"Rust Head Block: Understanding Character Interpretation Challenges"
+"Handling Windows Newline Characters in Rust's Head Version"

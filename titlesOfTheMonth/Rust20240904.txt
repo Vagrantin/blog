@@ -1,1 +1,1 @@
-"Cutting-Edge Head: My Journey with GNU Head in Rust"
+"Head-to-Head: Rust's Head vs GNU Head"

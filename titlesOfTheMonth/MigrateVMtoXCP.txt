@@ -1,1 +1,1 @@
-"Xen Orchestra Migration Masterclass"
+"Migrating VMs to XCP-ng: A Tale of Trial and Error"

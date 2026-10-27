@@ -1,1 +1,1 @@
-"XCP-ngCommunityEdition Pipeline Explained"
+"XCP-ng Community Edition: Streamlining XOA Setup"

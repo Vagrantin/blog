@@ -1,1 +1,1 @@
-"Mastering SSH Sessions with Rust & Claude.ai"
+"Streamlining SSH Connections with Rust and Windows Terminal"
