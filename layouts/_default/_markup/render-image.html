@@ -1,0 +1,16 @@
+{{ $dest := .Destination }}
+{{ $src := $dest }}
+{{ $width := 0 }}{{ $height := 0 }}
+{{ if not (urls.Parse $dest).IsAbs }}
+  {{ with .Page.Resources.GetMatch $dest }}
+    {{ $src = .RelPermalink }}
+    {{ if and (eq .ResourceType "image") (ne .MediaType.SubType "svg") }}{{ $width = .Width }}{{ $height = .Height }}{{ end }}
+  {{ else }}
+    {{ if hasPrefix $dest "/" }}
+      {{ $src = strings.TrimPrefix "/" $dest | relURL }}
+      {{ $file := printf "static%s" $dest }}
+      {{ if fileExists $file }}{{ $config := images.Config $file }}{{ $width = $config.Width }}{{ $height = $config.Height }}{{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+<img src="{{ $src | safeURL }}" alt="{{ .Text }}" loading="lazy" decoding="async"{{ if $width }} width="{{ $width }}" height="{{ $height }}"{{ end }}{{ with .Title }} title="{{ . }}"{{ end }}>

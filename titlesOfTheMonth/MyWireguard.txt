@@ -1,1 +1,0 @@
-Rust Tool for Automatic DNS Update on WireGuard

@@ -1,1 +1,0 @@
-"Mastering Ratatui's Canvas: Draw ASCII Art on Terminal UI"

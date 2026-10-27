@@ -1,0 +1,8 @@
+{{ define "main" }}
+<article class="reading">
+  <header class="article-header"><a class="read-link" href="{{ "archive/" | relURL }}">← All articles</a><p class="meta"><time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}">{{ .PublishDate.Format "January 2, 2006" }}</time> · {{ .ReadingTime }} min read</p><h1>{{ .Title }}</h1>{{ with .Description }}<p class="summary">{{ . }}</p>{{ end }}</header>
+  {{ if gt .WordCount 700 }}<details class="contents"><summary>In this article</summary>{{ .TableOfContents }}</details>{{ end }}
+  <div class="prose">{{ .Content }}</div>
+  <nav class="article-pagination" aria-label="Other articles">{{ with .PrevInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}{{ with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}</nav>
+</article>
+{{ end }}

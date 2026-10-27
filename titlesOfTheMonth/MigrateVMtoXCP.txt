@@ -1,1 +1,0 @@
-"Migrating VMs to XCP-ng: A Tale of Trial and Error"

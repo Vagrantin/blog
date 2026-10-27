@@ -1,0 +1,3 @@
+{{ define "main" }}
+<div class="archive"><h1>{{ .Title }}</h1>{{ range .Pages.ByPublishDate.Reverse }}<article class="post-row"><time class="meta" datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "January 2, 2006" }}</time><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2></article>{{ end }}</div>
+{{ end }}

@@ -1,0 +1,5 @@
+{{ define "main" }}
+<div class="archive"><p class="eyebrow">The complete journal</p><h1>{{ .Title }}</h1>
+{{ range (where .Site.RegularPages "Section" "posts").ByPublishDate.Reverse.GroupByPublishDate "2006" }}<section><h2>{{ .Key }}</h2>{{ range .Pages }}<article class="post-row"><time class="meta" datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "January 2" }}</time><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3></article>{{ end }}</section>{{ end }}
+</div>
+{{ end }}
