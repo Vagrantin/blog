@@ -1,0 +1,354 @@
+{
+  "sourceCommit": "6c27445de1c99b48933b6a6f266b3cab5ab07c7a",
+  "articles": [
+    {
+      "source": "20240807/Rust20240807.odt",
+      "sourceSha256": "ade2735fe62a77c286f073018303c022eddd704c5aef7d8a6b86639044aa626e",
+      "content": "content/posts/20240807/index.md",
+      "url": "/20240807/Rust20240807.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20240807/Pictures/1000000000000172000000F6261356188F999449.png",
+        "/20240807/Pictures/100000000000018F00000077F0099C5D96CD15F4.png",
+        "/20240807/Pictures/10000000000001970000020519708EF13C84FA03.png",
+        "/20240807/Pictures/10000000000001A900000203BA96E04ED8CA5A8D.png",
+        "/20240807/Pictures/10000000000001AE0000008F00B7F54216DC6942.png",
+        "/20240807/Pictures/10000000000001AF00000055665C8B501DA82B0B.png",
+        "/20240807/Pictures/10000000000001E10000005B79EC623040311691.png",
+        "/20240807/Pictures/10000000000002720000004601780FA891A2A425.png",
+        "/20240807/Pictures/10000000000002CB0000006F19D84F6489BCED58.png",
+        "/20240807/Pictures/10000000000002EC000001AD72C1A2983A245253.png",
+        "/20240807/Pictures/10000000000003F500000183FA2E644017ED1BF6.png",
+        "/20240807/Pictures/10000000000004190000019C3CC0D22BDFF8C067.png",
+        "/20240807/Pictures/10000000000004AE0000008382393BF98B07E164.png",
+        "/20240807/Pictures/10000000000005680000020B839A6164216D8951.png",
+        "/20240807/Pictures/10000000000006030000020CC9ACC1C606F5C988.png",
+        "/20240807/header20240807.png"
+      ]
+    },
+    {
+      "source": "20240904/Rust20240904.odt",
+      "sourceSha256": "ad9ba9c6a58e8d10d93ac95c32134efe47bfb4c260e0ca0f6e9e31d844886f7c",
+      "content": "content/posts/20240904/index.md",
+      "url": "/20240904/Rust20240904.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20240904/Pictures/10000000000002520000011962F86465BAFD1046.png",
+        "/20240904/Pictures/100000000000025700000108D1D81EF22687C8D8.png",
+        "/20240904/Pictures/100000000000025B0000010F5801355EE89FF4A1.png",
+        "/20240904/Pictures/10000000000002FB000000D11462222FF3F5D441.png",
+        "/20240904/Pictures/100000000000033400000094152FA9FE89D9CF35.png",
+        "/20240904/Pictures/100000000000041100000083915605ABA4D4B1AA.png",
+        "/20240904/Pictures/10000000000004EA000000853C2BB07F379F83E6.png",
+        "/20240904/Pictures/100000000000070E000001484212000633DE2178.png",
+        "/20240904/header20240904.png"
+      ]
+    },
+    {
+      "source": "20241002/Rust20241002.odt",
+      "sourceSha256": "bbc5a37971b05eeb049dd1f844dd1963f38327e9a686a4826bb7a42d2d3de532",
+      "content": "content/posts/20241002/index.md",
+      "url": "/20241002/Rust20241002.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20241002/header20241002.png"
+      ]
+    },
+    {
+      "source": "20241107/Rust20241107.odt",
+      "sourceSha256": "7ff59a7dad29c082121c8fa0ef0c6ad6751f85c87fbec96a0bdbac113770c755",
+      "content": "content/posts/20241107/index.md",
+      "url": "/20241107/Rust20241107.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20241107/Pictures/10000000000002BC000001CDE2507A1FB18711E2.png",
+        "/20241107/Pictures/10000000000002E2000002B81A757E3554233F53.png",
+        "/20241107/header20241107.png"
+      ]
+    },
+    {
+      "source": "20241206/Rust20241206.odt",
+      "sourceSha256": "0d8b5497a8fb330d36295c2ad9a4160e3245fdc2af91a7c14d106df17c0c0ee0",
+      "content": "content/posts/20241206/index.md",
+      "url": "/20241206/Rust20241206.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20241206/Pictures/100000000000023800000112BDF91FCE977B522D.png",
+        "/20241206/Pictures/1000000000000276000000BDC6C4745AC3FAB034.png",
+        "/20241206/Pictures/10000000000003F100000298932A67EBB4ED3FE9.png",
+        "/20241206/Pictures/10000000000003F5000002565508CA73E11112C2.png",
+        "/20241206/header20241206-1.jpeg",
+        "/20241206/header20241206.jpeg",
+        "/20241206/header20241206.png"
+      ]
+    },
+    {
+      "source": "20250205/Rust20250205.odt",
+      "sourceSha256": "9338c45b02eac7ed9dd71552bf4974e47313a14d12736ddbe75bbbb11b5de121",
+      "content": "content/posts/20250205/index.md",
+      "url": "/20250205/Rust20250205.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20250205/header.png",
+        "/20250205/version1NOK.png",
+        "/20250205/version2reverse.png",
+        "/20250205/version3OK.png"
+      ]
+    },
+    {
+      "source": "20250305/Rust20250305.odt",
+      "sourceSha256": "e667bd3ce650db2303e51ee04ae87d87af58afd95a3837e754dbc7f9a4de8123",
+      "content": "content/posts/20250305/index.md",
+      "url": "/20250305/Rust20250305.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20250305/20250305header.jpeg",
+        "/20250305/Pictures/1000000000000375000002080A141CC9EFC02D3F.png",
+        "/20250305/Pictures/10000000000003800000022873EC62B24086C2E1.png",
+        "/20250305/Pictures/10000000000004740000039E600FABD768109D18.png",
+        "/20250305/Pictures/10000000000004AB00000188C5664B36F43F001D.png",
+        "/20250305/Pictures/10000001000001C20000025C8EB5B4E7C8AD82A9.png",
+        "/20250305/sshTui.mp4"
+      ]
+    },
+    {
+      "source": "20250402/Rust20250402.odt",
+      "sourceSha256": "da57dd8449fcc751552c49a23865051f52939e707baaf5b1ccb8b86fa419f009",
+      "content": "content/posts/20250402/index.md",
+      "url": "/20250402/Rust20250402.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20250402/RobotsAndHuman.jpg"
+      ]
+    },
+    {
+      "source": "20250507/Rust20250507.odt",
+      "sourceSha256": "e3afcb6fb7f1989d0bb7e76be88ff55fa331fc326d3fc2943db848ae8e2ab6f7",
+      "content": "content/posts/20250507/index.md",
+      "url": "/20250507/Rust20250507.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20250507/header.jpeg"
+      ]
+    },
+    {
+      "source": "20250702/hostMyBlogWithGitHubPages.odt",
+      "sourceSha256": "418330f8b9cc2cfcb323c372235df4595d48682c6537bd641492257455556086",
+      "content": "content/posts/20250702/index.md",
+      "url": "/20250702/hostMyBlogWithGitHubPages.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": []
+    },
+    {
+      "source": "20250806/createArticleTitleAiWF.odt",
+      "sourceSha256": "38e93f2be2f9bb11a566f8b9a572578f96e5c2622adc243cbcd622fa417b1cb0",
+      "content": "content/posts/20250806/index.md",
+      "url": "/20250806/createArticleTitleAiWF.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20250806/Pictures/10000000000003CB0000019C306E127F5CDE16FC.png",
+        "/20250806/Pictures/10000000000005DD0000021FD0E28905CFBBBC7C.png"
+      ]
+    },
+    {
+      "source": "20250903/aiBackendWF.odt",
+      "sourceSha256": "8abb44617deacd0d6a34c896995230dfeab3555f7fb16d21a343cdbe1108b28c",
+      "content": "content/posts/20250903/index.md",
+      "url": "/20250903/aiBackendWF.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20250903/Pictures/1000000000000158000000503A6CCAADD6B99853.png",
+        "/20250903/Pictures/100000000000016E0000003539E99B1ADFF2577A.png",
+        "/20250903/Pictures/10000000000001B800000017BF93C03827E7746C.png",
+        "/20250903/Pictures/10000000000001CA0000001E2F704B7532494513.png",
+        "/20250903/Pictures/10000000000001EE0000001710A2B221B0EFBF7B.png",
+        "/20250903/Pictures/1000000000000214000000268210EF68C3905932.png",
+        "/20250903/Pictures/100000000000022900000035AE5740088D1A45B9.png",
+        "/20250903/Pictures/1000000000000277000000EE4285C3B35EF07982.png",
+        "/20250903/Pictures/10000000000002B20000003B3D5F59578608D0CE.png",
+        "/20250903/Pictures/10000000000002BF000001CBE7DFF0EF397F8A83.png",
+        "/20250903/Pictures/10000000000002E6000000ED84B7363104A2E5A4.png",
+        "/20250903/Pictures/10000000000003030000001F5182AF2C5F5CBD0C.png",
+        "/20250903/Pictures/100000000000032A0000008F43D936161F6EA610.png",
+        "/20250903/Pictures/100000000000047F0000008153D0AB08CB15FEE2.png",
+        "/20250903/Pictures/10000000000007EF000000CF0B25146A1EF59414.png"
+      ]
+    },
+    {
+      "source": "20251105/Rustique_un-char-ted.odt",
+      "sourceSha256": "6b8316a1882c01b11eaa0989c374fe8bb2f4bc00082f754904bd95d3d4352c4e",
+      "content": "content/posts/20251105/index.md",
+      "url": "/20251105/Rustique_un-char-ted.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20251105/Pictures/100000000000023B0000018A7249AECCB20300A1.png",
+        "/20251105/Pictures/1000000000000244000001E46D8CFE81E54E49E2.png",
+        "/20251105/StringType.png",
+        "/20251105/VectorType.png"
+      ]
+    },
+    {
+      "source": "20251203/raspberry-router-dns.odt",
+      "sourceSha256": "f25414c0294f019bc529576c8f37c0b9675497c4670de16e3601fc72ded942fc",
+      "content": "content/posts/20251203/index.md",
+      "url": "/20251203/raspberry-router-dns.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": []
+    },
+    {
+      "source": "20260107/xcp-ng-first-install.odt",
+      "sourceSha256": "a7518921ca73cf1c90e3791390d6a246cb1968d7d327818062f9ce0e68c826eb",
+      "content": "content/posts/20260107/index.md",
+      "url": "/20260107/xcp-ng-first-install.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20260107/01.jpg",
+        "/20260107/02.jpg",
+        "/20260107/03.jpg",
+        "/20260107/04.jpg",
+        "/20260107/05.jpg",
+        "/20260107/06.jpg",
+        "/20260107/07.jpg",
+        "/20260107/08.jpg",
+        "/20260107/09.jpg",
+        "/20260107/10.jpg",
+        "/20260107/11.jpg",
+        "/20260107/12.jpg",
+        "/20260107/13.jpg",
+        "/20260107/14.jpg",
+        "/20260107/15.jpg",
+        "/20260107/16.jpg",
+        "/20260107/17.jpg",
+        "/20260107/18.jpg",
+        "/20260107/19.jpg",
+        "/20260107/20.jpg",
+        "/20260107/21.jpg",
+        "/20260107/22.jpg",
+        "/20260107/23.jpg",
+        "/20260107/24.jpg",
+        "/20260107/25.jpg",
+        "/20260107/26.jpg",
+        "/20260107/27.jpg",
+        "/20260107/Pictures/10000000000001D70000025D33511FA25A6E7C1C.png",
+        "/20260107/Pictures/10000000000001E5000002930DF410D24CE9E092.png",
+        "/20260107/Pictures/1000000000000283000001865D3903B8933BD8FE.jpg",
+        "/20260107/Pictures/10000000000002F00000023C74883086548F644F.jpg",
+        "/20260107/Pictures/1000000000000300000002E3B90E6EABE8412416.jpg",
+        "/20260107/Pictures/100000000000030A0000026157D24F1E00BB28D4.jpg",
+        "/20260107/Pictures/10000000000003290000022074F54A6416C8C79E.jpg",
+        "/20260107/Pictures/100000000000033E000001E0CE5ABBC2DA9D19ED.jpg",
+        "/20260107/Pictures/10000000000003600000027BDD037377B12F2B1C.jpg",
+        "/20260107/Pictures/100000000000036C000001F6781D9A5C4F65AB56.jpg",
+        "/20260107/Pictures/100000000000036E0000029E2C822C9C99284027.jpg",
+        "/20260107/Pictures/100000000000036F000002547E29A6C9B5823A48.jpg",
+        "/20260107/Pictures/10000000000003AB00000165592997CA424B967D.jpg",
+        "/20260107/Pictures/10000000000003AB0000022EE34D73ADD024769E.jpg",
+        "/20260107/Pictures/10000000000003AD000002E20C2B6B1E6B1A7BF8.jpg",
+        "/20260107/Pictures/10000000000003C800000150F7714F3154E17978.jpg",
+        "/20260107/Pictures/10000000000003D200000205F69702971DDEAA42.jpg",
+        "/20260107/Pictures/10000000000003EC00000160343A103669BA6957.jpg",
+        "/20260107/Pictures/1000000000000412000002AE57DCDC6A86D3420D.jpg",
+        "/20260107/Pictures/100000000000041C00000293D23DB1CE068DE3B0.jpg",
+        "/20260107/Pictures/100000000000041E0000024B7E17A0B88CC16B5E.jpg",
+        "/20260107/Pictures/100000000000043A00000215013082EFF06616B3.png",
+        "/20260107/Pictures/1000000000000482000002D342A508791F2A9F4E.jpg",
+        "/20260107/Pictures/10000000000004E8000002CD174ED06CD93F7C46.jpg",
+        "/20260107/Pictures/10000000000004E900000236D1FD179891452CA5.png",
+        "/20260107/Pictures/10000000000004EE00000211504F1CB52944AD4C.jpg",
+        "/20260107/Pictures/10000000000006000000040001F14C1BA2EC342B.png",
+        "/20260107/Pictures/10000000000007D2000003EAB13CDBB78B3FA86C.png",
+        "/20260107/Pictures/10000000000008F700000447F7672839BA4AD56E.png",
+        "/20260107/Pictures/1000000000000FA0000008CC8D8A61A1E2D6482E.jpg"
+      ]
+    },
+    {
+      "source": "20260204/MyWireguard.odt",
+      "sourceSha256": "0c55e9fc5b9437f0ea0eea187b24bfe8f8ad1c36e954e585a72b1d522e61bc30",
+      "content": "content/posts/20260204/index.md",
+      "url": "/20260204/MyWireguard.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": [
+        "/20260204/Pictures/10000000000001D7000002EFF986ACAE42505009.png",
+        "/20260204/Pictures/10000000000001DE0000034BABCF1FABCBEA5A36.png",
+        "/20260204/Pictures/10000000000001EF0000013DC08649979E31CF07.png",
+        "/20260204/Pictures/10000000000003D7000004347F63B3817C9E1804.png"
+      ]
+    },
+    {
+      "source": "20260304/MigrateVMtoXCP.odt",
+      "sourceSha256": "028549d8dc565e76f896232fc715e09c0abe40b6f78bcbab8c7a88bc59bab567",
+      "content": "content/posts/20260304/index.md",
+      "url": "/20260304/MigrateVMtoXCP.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": []
+    },
+    {
+      "source": "20260401/XCP-ngCommunityEdition.odt",
+      "sourceSha256": "15d1d1a93d2901bb76c9551621cc09a49d5932dcdddfb5efb6eb25e60435307d",
+      "content": "content/posts/20260401/index.md",
+      "url": "/20260401/XCP-ngCommunityEdition.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": []
+    },
+    {
+      "source": "20260506/OSSNotDead.odt",
+      "sourceSha256": "2ac058a69bd285c35fff59e35ee920051f43e46bacfc17b15d718c02dd70d049",
+      "content": "content/posts/20260506/index.md",
+      "url": "/20260506/OSSNotDead.html",
+      "published": true,
+      "literalMarkdownRepaired": false,
+      "media": []
+    },
+    {
+      "source": "20260805/XcpHlTheJourney.odt",
+      "sourceSha256": "c34a95a08a06a2844234a4251a1aa7f0522369d194ba930a07b584c1ff0027ee",
+      "content": "content/posts/20260805/index.md",
+      "url": "/20260805/XcpHlTheJourney.html",
+      "published": true,
+      "literalMarkdownRepaired": true,
+      "media": [
+        "/20260805/Pictures/10000001000005A6000002B7DB1D9D994C67CE19.png",
+        "/20260805/Pictures/10000001000008F60000027959319249BE746FA8.png",
+        "/20260805/Xcp-ng-HL-HLDesign.png"
+      ]
+    },
+    {
+      "source": "20260902/PatchingXoLite.odt",
+      "sourceSha256": "aa5c0cdfc428b0f9fe2615dec530d7dc13d834aa75389a704823eda57163fbbe",
+      "content": "content/posts/20260902/index.md",
+      "url": "/20260902/PatchingXoLite.html",
+      "published": true,
+      "literalMarkdownRepaired": true,
+      "media": [
+        "/20260902/Pictures/100000000000050F000001D623B847831AF1C26C.png"
+      ]
+    },
+    {
+      "source": "20360404/reflectAi.odt",
+      "sourceSha256": "5c9e62dba152ebe9d55b0d3cf3af6120533bdbfa2efde7fc6bd7ded7cc51ed5f",
+      "content": "content/posts/20360404/index.md",
+      "url": "/20360404/reflectAi.html",
+      "published": false,
+      "literalMarkdownRepaired": false,
+      "media": []
+    }
+  ]
+}

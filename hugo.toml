@@ -1,0 +1,33 @@
+baseURL = 'https://vagrantin.github.io/blog/'
+title = 'Nekkuma'
+languageCode = 'en'
+timeZone = 'Asia/Tokyo'
+disablePathToLower = true
+buildDrafts = false
+buildFuture = false
+enableRobotsTXT = true
+disableKinds = ['taxonomy', 'term']
+summaryLength = 32
+
+[pagination]
+pagerSize = 10
+
+[frontmatter]
+date = ['publishDate']
+publishDate = ['publishDate']
+
+[params]
+description = 'Rust, open source, and the home lab. A monthly journal by Nekkuma.'
+tagline = 'Dump! Dump! Dump!'
+
+[markup.goldmark.renderer]
+unsafe = false
+
+[markup.highlight]
+noClasses = false
+
+[outputs]
+home = ['HTML', 'RSS']
+
+[sitemap]
+changeFreq = 'monthly'

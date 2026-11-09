@@ -1,1 +1,0 @@
-"Rust Power Manager: Battery Notifications on i3wm"

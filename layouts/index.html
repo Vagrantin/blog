@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ $pager := .Paginate $posts.ByPublishDate.Reverse }}
+{{ if eq $pager.PageNumber 1 }}
+<div class="feature">
+  <div class="intro"><p class="eyebrow">The monthly journal</p><p>Rust, open source, <br>and the home lab.</p></div>
+  {{ range first 1 $pager.Pages }}<article><p class="meta"><time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}">{{ .PublishDate.Format "January 2, 2006" }}</time></p><h1><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1><p class="summary">{{ .Description | default (.Summary | plainify | truncate 210) }}</p><a class="read-link" href="{{ .RelPermalink }}">Read the article <span aria-hidden="true">→</span></a></article>{{ end }}
+</div>
+{{ else }}<h1 class="list-heading">Earlier articles</h1>{{ end }}
+<div class="post-list">
+{{ $rest := $pager.Pages }}{{ if eq $pager.PageNumber 1 }}{{ $rest = after 1 $pager.Pages }}{{ end }}
+{{ range $rest }}<article class="post-row"><time class="meta" datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "January 2, 2006" }}</time><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2></article>{{ end }}
+</div>
+{{ if gt $pager.TotalPages 1 }}<nav class="pagination" aria-label="Article pages">{{ with $pager.Prev }}<a href="{{ .URL }}">← Newer</a>{{ end }}<span>Page {{ $pager.PageNumber }} of {{ $pager.TotalPages }}</span>{{ with $pager.Next }}<a href="{{ .URL }}">Older →</a>{{ end }}</nav>{{ end }}
+{{ end }}

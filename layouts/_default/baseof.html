@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="{{ .Site.Language.LanguageCode }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Site.Title }} / Journal{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ .Description | default .Summary | default .Site.Params.description | plainify }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}">{{ end }}
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ "images/nekkuma-1440.jpg" | absURL }}">
+  <meta name="color-scheme" content="light dark">
+  <script>{{ readFile "assets/appearance-init.js" | safeJS }}</script>
+  {{ $css := resources.Get "journal.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{ $js := resources.Get "appearance.js" | minify | fingerprint }}
+  <script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-shell">
+    <header class="masthead">
+      <a class="wordmark" href="{{ .Site.Home.RelPermalink }}">Nekkuma <span>/ Journal</span></a>
+      <nav aria-label="Main navigation">
+        <a href="{{ .Site.Home.RelPermalink }}" {{ if .IsHome }}aria-current="page"{{ end }}>Articles</a>
+        <a href="{{ "archive/" | relURL }}" {{ if eq .Layout "archive" }}aria-current="page"{{ end }}>Archive</a>
+        <a href="{{ "index.xml" | relURL }}">RSS</a>
+        <label class="appearance" hidden>Appearance
+          <select id="appearance" aria-label="Color theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select>
+        </label>
+      </nav>
+    </header>
+    {{ if .IsHome }}
+    <picture class="hero">
+      <source type="image/webp" srcset="{{ "images/nekkuma-640.webp" | relURL }} 640w, {{ "images/nekkuma-960.webp" | relURL }} 960w, {{ "images/nekkuma-1440.webp" | relURL }} 1440w" sizes="(max-width: 1100px) 100vw, 1100px">
+      <img src="{{ "images/nekkuma-1440.jpg" | relURL }}" alt="Nekkuma, a cat in front of the full moon" width="2816" height="1536" fetchpriority="high">
+    </picture>
+    {{ end }}
+    <main id="main">{{ block "main" . }}{{ end }}</main>
+    <footer class="site-footer"><span>{{ .Site.Params.tagline }}</span><span>First Wednesday, every month. <a href="https://github.com/Vagrantin/blog">GitHub</a></span></footer>
+  </div>
+</body>
+</html>
