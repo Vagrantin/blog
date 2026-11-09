@@ -1,1 +1,0 @@
-"XCP-ng First Install Guide: From Login to VM Setup"
