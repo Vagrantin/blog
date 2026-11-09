@@ -1,0 +1,28 @@
+{
+  "hugoVersion": "0.145.0",
+  "sourceCommit": "71e298fe1f258b67a832cf1db57cdf59427725f0",
+  "sourceRef": "main",
+  "visibleUrls": [
+    "/20240807/Rust20240807.html",
+    "/20240904/Rust20240904.html",
+    "/20241002/Rust20241002.html",
+    "/20241107/Rust20241107.html",
+    "/20241206/Rust20241206.html",
+    "/20250205/Rust20250205.html",
+    "/20250305/Rust20250305.html",
+    "/20250402/Rust20250402.html",
+    "/20250507/Rust20250507.html",
+    "/20250702/hostMyBlogWithGitHubPages.html",
+    "/20250806/createArticleTitleAiWF.html",
+    "/20250903/aiBackendWF.html",
+    "/20251105/Rustique_un-char-ted.html",
+    "/20251203/raspberry-router-dns.html",
+    "/20260107/xcp-ng-first-install.html",
+    "/20260204/MyWireguard.html",
+    "/20260304/MigrateVMtoXCP.html",
+    "/20260401/XCP-ngCommunityEdition.html",
+    "/20260506/OSSNotDead.html",
+    "/20260805/XcpHlTheJourney.html",
+    "/20260902/PatchingXoLite.html"
+  ]
+}
